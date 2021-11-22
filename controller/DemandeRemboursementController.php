@@ -25,10 +25,10 @@ class DemandeRemboursementController extends Controller
         $laDemande = new DemandeRemboursement(
             null,
             date('Y-m-d H:i:s'),
-            0,
+            $_POST['montant'],
             $_POST['commentaire'],
-            new TypeFrais($idUtilConnecte, null),
-            new Utilisateur($_POST['typeFrais'])
+            new TypeFrais($_POST['typeFrais']),
+            new Utilisateur($idUtilConnecte)
         );
         $uneDemandeRepository = new DemandeRemboursementRepository();
         $ret = $uneDemandeRepository->ajoutDemandeRemboursement($laDemande);

@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_get('Europe/Paris');
 //class dont on a besoin (classe Repository.php obligatoire)
 require_once("Repository.php");
 
@@ -29,8 +30,6 @@ class DemandeRemboursementRepository extends Repository
     {
         $db = $this->dbConnect();
         try {
-            session_start();
-            $id = $_SESSION['id'];
             // on prépare la requête select
             $req = $db->prepare("update demande_remboursement 
             set  montant = :par_montant,
