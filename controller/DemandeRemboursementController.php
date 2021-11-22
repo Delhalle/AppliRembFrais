@@ -101,8 +101,10 @@ class DemandeRemboursementController extends Controller
     }
     public function consultMesDemandeRemboursement()
     {
+        session_start();
+        $id = $_SESSION['id'];
         $unDemRemboursRepository = new DemandeRemboursementRepository();
-        $lesDemandes = $unDemRemboursRepository->getMesDemandesRemboursement();
+        $lesDemandes = $unDemRemboursRepository->getMesDemandesRemboursement($id);
 
         $this->render("demandeRemboursement/consultDemandeListe", array("title" => "Liste des demandes de remboursement", "lesDemandes" => $lesDemandes));
     }
