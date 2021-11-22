@@ -2,7 +2,7 @@
 <h2 class="text-center">Vos demandes de remboursement</h2>
 
 <?php
-if (count($lesDemandes) != 0) {
+if (count($lesDemandes) == 0) {
     echo ("Vous n'avez saisi aucune demande");
 } else {
 ?>
@@ -18,9 +18,9 @@ if (count($lesDemandes) != 0) {
         <?php foreach ($lesDemandes as $uneDemande) {
             echo ("<tr>");
             echo ("<td>" . $uneDemande->getDateSaisie() . "</td>");
-            echo ("<td>" . $uneDemande->getCommentaire()  . "</td>");
-            echo ("<td>" . $uneDemande->getMontant() . "</td>");
             echo ("<td>" . $uneDemande->getTypeFrais()->getLibelle() . "</td>");
+            echo ("<td>" . $uneDemande->getMontant() . "</td>");
+            echo ("<td>" . $uneDemande->getCommentaire()  . "</td>");
             echo ("</tr>");
         } ?>
     </table>

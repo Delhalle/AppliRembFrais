@@ -29,8 +29,6 @@ class DemandeRemboursementRepository extends Repository
     {
         $db = $this->dbConnect();
         try {
-            session_start();
-            $id = $_SESSION['id'];
             // on prépare la requête select
             $req = $db->prepare("update demande_remboursement 
             set  montant = :par_montant,
@@ -54,13 +52,16 @@ class DemandeRemboursementRepository extends Repository
     }
     public function getMesDemandesRemboursement($idDelegue = null)
     {
+        
         $lesDemandes = array();
         $db = $this->dbConnect();
         $req = $db->prepare("select demande_remboursement.id as id, 
                         DATE_FORMAT(date_saisie, '%d/%m/%Y à %H:%i:%s') as date_saisie, 
                         type_frais.libelle,montant, commentaire
                         from demande_remboursement 
-                join type_frais on type_frais.id = id_type_frais");
+                join type_frais on type_frais.id = id_type_frais where id_delegue = :par_id");
+        // on affecte une valeur au paramètre déclaré dans la requête 
+        $req->bindValue(':par_id', $idDelegue, PDO::PARAM_INT);
         // on demande l'exécution de la requête 
         $req->execute();
         $lesEnregs = $req->fetchAll();
@@ -73,6 +74,7 @@ class DemandeRemboursementRepository extends Repository
                 new TypeFrais(null, $enreg->libelle),
                 null
             );
+
             array_push($lesDemandes, $uneDemande);
         }
         return $lesDemandes;
