@@ -27,7 +27,7 @@ class DemandeRemboursementController extends Controller
             date('Y-m-d H:i:s'),
             $_POST['montant'],
             $_POST['commentaire'],
-            new TypeFrais($_POST['typeFrais']),
+            new TypeFrais($_POST['typeFrais'],null),
             new Utilisateur($idUtilConnecte)
         );
         $uneDemandeRepository = new DemandeRemboursementRepository();
