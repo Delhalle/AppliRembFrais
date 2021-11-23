@@ -1,5 +1,5 @@
 <?php
-date_default_timezone_get('Europe/Paris');
+date_default_timezone_set('Europe/Paris');
 //class dont on a besoin (classe Repository.php obligatoire)
 require_once("Repository.php");
 
