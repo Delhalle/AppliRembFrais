@@ -81,6 +81,13 @@ if (isset($_GET['action'])) {
             $leControleur = new UtilisateurController();
             $leControleur->connexionTrait($_POST);
             break;
+        case "ajoutFormSuivi":
+            // demande du formulaire d'ajout d'un utilisateur
+            require(ROOT . "/controller/Controller.php");
+            require(ROOT . "/controller/FormationSuiviController.php");
+            $leControleur = new FormationSuiviController();
+            $leControleur->ajoutFormationSuiviForm();
+            break;
         case "accueil":
             // action contient accueil (choix de l'option accueil dans le menu)
             afficheFormConnexion();
