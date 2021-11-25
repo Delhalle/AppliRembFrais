@@ -43,6 +43,32 @@ if (isset($_GET['action'])) {
             $leControleur = new DemandeRemboursementController();
             $leControleur->ajoutDemandeRemboursementTrait();
             break;
+        case "ajoutVisiteForm":
+            session_start();
+            //if (session_status() == 3) {
+            $idDelegue = $_SESSION['id'];
+            //}
+            if (isset($idDelegue) == false || $idDelegue == 0) {
+                require(ROOT . "/controller/Controller.php");
+                require(ROOT . "/controller/UtilisateurController.php");
+                $leControleur = new UtilisateurController();
+                $leControleur->connexionForm();
+                break;
+            }
+            // demande du formulaire d'ajout d'une visite
+            require(ROOT . "/controller/Controller.php");
+            require(ROOT . "/controller/VisiteController.php");
+            $leControleur = new VisiteController();
+            $leControleur->ajoutVisiteForm();
+            break;
+        case "ajoutVisiteTrait":
+            // le formulaire d'ajout d'une visite a été soumis.
+            // Vérification et enregistrement des informations saisies
+            require(ROOT . "/controller/Controller.php");
+            require(ROOT . "/controller/VisiteController.php");
+            $leControleur = new VisiteController();
+            $leControleur->ajoutVisiteTrait();
+            break;
         case "modifDemRembListeForm":
             // demande du formulaire permettant d'obtenir la liste des
             // demande de remboursement en vue d'une modification
@@ -72,6 +98,20 @@ if (isset($_GET['action'])) {
             require(ROOT . "/controller/DemandeRemboursementController.php");
             $leControleur = new DemandeRemboursementController();
             $leControleur->consultMesDemandeRemboursement();
+            break;
+        case "consultVisite":
+            // affichage des visites pour le délegué choisis
+            require(ROOT . "/controller/Controller.php");
+            require(ROOT . "/controller/VisiteController.php");
+            $leControleur = new VisiteController();
+            $leControleur->consultLesVisites();
+            break;
+        case "consultVisiteListe":
+            // affichage des visites pour le délegué choisis
+            require(ROOT . "/controller/Controller.php");
+            require(ROOT . "/controller/UtilisateurController.php");
+            $leControleur = new UtilisateurController();
+            $leControleur->consultLesDeleguesListe();
             break;
         case "connexionTrait":
             // le formulaire de connexion a été soumis. 
