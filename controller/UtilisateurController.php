@@ -101,10 +101,8 @@ class UtilisateurController extends Controller
     public function consultLesDeleguesListe()
     {
         //
-        session_start();
-        $idDelegue = $_SESSION['id'];
         $UtilisateurRepository = new UtilisateurRepository();
-        $lesDelegues = $UtilisateurRepository->getLesDelegues($idDelegue);
+        $lesDelegues = $UtilisateurRepository->getLesDelegues();
 
         $this->render("visite/consultDelegueListe", array("title" => "Liste des visites", "lesDelegues" => $lesDelegues));
     }
