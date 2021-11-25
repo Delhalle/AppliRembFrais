@@ -2,12 +2,20 @@
 class FormationSuivi
 {
     private ?int $id;
+	private ?string $dateSaisie;
     private ?string $commentaire;
+	private ?int $note;
+	private ?Formation $laFormation;
+	private ?Utilisateur $leDelegue;
     
-    public function __construct($id, $commentaire)
+    public function __construct($id, $dateSaisie, $commentaire, $note, $laFormation, $leDelegue)
     {
         $this->id = $id;
+		$this->dateSaisie = $dateSaisie;
         $this->commentaire = $commentaire;
+		$this->note = $note;
+		$this->laFormation = $laFormation;
+		$this->leDelegue = $leDelegue;
     }
 
     public function getId()
@@ -17,6 +25,14 @@ class FormationSuivi
 	public function setId($id)
 	{
 		$this->id = $id;
+	}
+	public function getDateSaisie()
+	{
+		return $this->dateSaisie;
+	}
+	public function setDateSaisie($dateSaisie)
+	{
+		$this->dateSaisie = $dateSaisie;
 	}
     public function getCommentaire()
 	{
@@ -34,20 +50,20 @@ class FormationSuivi
 	{
 		$this->note = $note;
 	}
-    public function getIdFormation()
+    public function getFormation()
 	{
-		return $this->idFormation;
+		return $this->laFormation;
 	}
-	public function setIdFormation($idFormation)
+	public function setFormation($laFormation)
 	{
-		$this->idFormation = $idFormation;
+		$this->laFormation = $laFormation;
 	}
-    public function getIdDelegue()
+    public function getDelegue()
 	{
-		return $this->idDelegue;
+		return $this->leDelegue;
 	}
-	public function setIdDelegue($idDelegue)
+	public function setDelegue($leDelegue)
 	{
-		$this->idDelegue = $idDelegue;
+		$this->leDelegue = $leDelegue;
 	}
 }
