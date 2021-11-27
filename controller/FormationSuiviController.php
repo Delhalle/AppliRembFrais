@@ -7,16 +7,17 @@ class FormationSuiviController extends Controller
         parent::__construct();
         require_once(ROOT . '/model/repository/FormationSuiviRepository.php');
         require_once(ROOT . '/model/repository/UtilisateurRepository.php');
+        require_once(ROOT . '/model/repository/FormationRepository.php');
         require_once(ROOT . '/model/entity/FormationSuivi.php');
         require_once(ROOT . '/model/entity/Utilisateur.php');
         require_once(ROOT . '/model/entity/Formation.php');
     }
     public function ajoutFormationSuiviForm()
     {
-        $utilisateurRepository = new UtilisateurRepository();
-        $lesUtilisateurs = $utilisateurRepository->getLesUtilisateurs();
-
-        $this->render("FormationSuivi/ajoutFormationSuivi", array ("title" => "Ajout d'une formation suivi", "lesUtilisateurs"=>$lesUtilisateurs));
+        $formationRepository = new FormationRepository();
+        $lesFormations = $formationRepository->getLesFormations();
+        
+        $this->render("FormationSuivi/ajoutFormationSuivi", array ("title" => "Ajout d'une formation suivi", "lesFormations"=>$lesFormations));
     }
     public function ajoutFormationSuiviTrait()  
     {
@@ -41,10 +42,11 @@ class FormationSuiviController extends Controller
             $msg = "<p class='text-success'>Votre demande a été enregistrée</p>";
         }
         //
-        $utilisateurRepository = new UtilisateurRepository();
-        $lesUtilisateurs = $utilisateurRepository->getLesUtilisateurs();
-        $this->render("FormationSuivi/ajoutFormationSuivi", array ("title" => "Ajout d'une formation suivi", "lesUtilisateurs"=>$lesUtilisateurs, "msg" => $msg));
+        $formationRepository = new FormationRepository();
+        $lesFormations = $formationRepository->getLesFormations();
+        $this->render("FormationSuivi/ajoutFormationSuivi", array ("title" => "Ajout d'une formation suivi", "lesUtilisateurs"=>$lesFormations, "msg" => $msg));
     }
+    
     public function consultMesFormationSuivi()
     {
     session_start();
