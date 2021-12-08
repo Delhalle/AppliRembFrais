@@ -11,7 +11,7 @@
         <div class="col-sm-12">
             <!-- liste déroulante -->
             <select class="form-select form-select-md" name="formation">
-                <?php foreach ($lesFormation as $uneFormation) {
+                <?php foreach ($lesFormations as $uneFormation) {
                     $id = $uneFormation->getId();
                     $form = $uneFormation->getFormation();
                     if (isset($_POST['formation']) == true && $_POST['formation'] == $unType->getId())
