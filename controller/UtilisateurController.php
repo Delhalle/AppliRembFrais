@@ -98,4 +98,14 @@ class UtilisateurController extends Controller
         }
         $this->render("utilisateur/ajoutUtilisateur", array("title" => "Ajout d'un utilisateur", "msg" => $msg));
     }
+    public function consultLesDeleguesListe()
+    {
+        //
+        session_start();
+        $idDelegue = $_SESSION['id'];
+        $UtilisateurRepository = new UtilisateurRepository();
+        $lesDelegues = $UtilisateurRepository->getLesDelegues($idDelegue);
+
+        $this->render("visite/consultDelegueListe", array("title" => "Liste des visites", "lesDelegues" => $lesDelegues));
+    }
 }

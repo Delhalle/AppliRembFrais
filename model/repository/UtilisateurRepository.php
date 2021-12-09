@@ -121,5 +121,29 @@ class UtilisateurRepository extends Repository
 
         array_push($lesUtilisateurs, $unUtilisateur);
         return $lesUtilisateurs;
+
+    public function getLesDelegues()
+    {
+        
+        $lesDelegues = array();
+        $db = $this->dbConnect();
+        $req = $db->prepare("select id, utilisateur.nom, utilisateur.prenom 
+                        from utilisateur
+                        where id_profil = 1");
+        // on demande l'exécution de la requête 
+        $req->execute();
+        $lesEnregs = $req->fetchAll();
+        foreach ($lesEnregs  as $enreg) {
+            $unDelegue = new Utilisateur(
+                $enreg->id,
+                $enreg->nom,
+                $enreg->prenom,
+                null
+            );
+
+            array_push($lesDelegues, $unDelegue);
+        }
+        return $lesDelegues;
+
     }
 }
