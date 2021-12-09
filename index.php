@@ -18,17 +18,7 @@ if (isset($_GET['action'])) {
             $leControleur->ajoutUtilisateurTrait();
             break;
         case "ajoutDemRembForm":
-            session_start();
-            //if (session_status() == 3) {
-            $idDelegue = $_SESSION['id'];
-            //}
-            if (isset($idDelegue) == false || $idDelegue == 0) {
-                require(ROOT . "/controller/Controller.php");
-                require(ROOT . "/controller/UtilisateurController.php");
-                $leControleur = new UtilisateurController();
-                $leControleur->connexionForm();
-                break;
-            }
+            
             // demande du formulaire d'ajout d'une demande de remboursement
             require(ROOT . "/controller/Controller.php");
             require(ROOT . "/controller/DemandeRemboursementController.php");
@@ -120,6 +110,21 @@ if (isset($_GET['action'])) {
             require(ROOT . "/controller/UtilisateurController.php");
             $leControleur = new UtilisateurController();
             $leControleur->connexionTrait($_POST);
+            break;
+        case "ajoutFormSuivi":
+            // demande du formulaire d'ajout d'un utilisateur
+            require(ROOT . "/controller/Controller.php");
+            require(ROOT . "/controller/FormationSuiviController.php");
+            $leControleur = new FormationSuiviController();
+            $leControleur->ajoutFormationSuiviForm();
+            break;
+        case "ajoutFormSuiviTrait":
+            // demande du formulaire permettant d'obtenir la liste des
+            // demande de remboursement en vue d'une modification
+            require(ROOT . "/controller/Controller.php");
+            require(ROOT . "/controller/FormationSuiviController.php");
+            $leControleur = new FormationSuiviController();
+            $leControleur->ajoutFormationSuiviTrait();
             break;
         case "accueil":
             // action contient accueil (choix de l'option accueil dans le menu)

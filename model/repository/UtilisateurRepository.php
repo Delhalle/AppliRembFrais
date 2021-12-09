@@ -103,6 +103,25 @@ class UtilisateurRepository extends Repository
         }
         return $ret;
     }
+    public function getLesUtilisateurs($idDem = null)
+    {
+        $lesUtilisateurs = array();
+        $db = $this->dbConnect();
+        $req = $db->prepare("select utilisateur.id, utilisateur.nom, utilisateur.prenom from utilisateur");
+        // on affecte une valeur au paramètre déclaré dans la requête 
+        $req->bindValue(':par_id', $idDem, PDO::PARAM_INT);
+        // on demande l'exécution de la requête 
+        $req->execute();
+        $enreg = $req->fetch();
+        $unUtilisateur = new Utilisateur(
+            $enreg->id,
+            $enreg->nom,
+            $enreg->prenom,
+        );
+
+        array_push($lesUtilisateurs, $unUtilisateur);
+        return $lesUtilisateurs;
+
     public function getLesDelegues()
     {
         
@@ -125,5 +144,6 @@ class UtilisateurRepository extends Repository
             array_push($lesDelegues, $unDelegue);
         }
         return $lesDelegues;
+
     }
 }
