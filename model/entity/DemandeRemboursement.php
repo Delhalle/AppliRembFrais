@@ -5,7 +5,7 @@ class DemandeRemboursement
 	private ?string $dateSaisie;
 	private float $montant;
 	private ?string $commentaire;
-	private TypeFrais $leTypeFrais;
+	private ?TypeFrais $leTypeFrais;
 	private ?Utilisateur $leDelegue;
 
 	public function __construct($id, $dateSaisie, $montant, $commentaire, $leTypeFrais, $leDelegue)

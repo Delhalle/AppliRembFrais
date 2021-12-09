@@ -103,4 +103,33 @@ class UtilisateurRepository extends Repository
         }
         return $ret;
     }
+    public function consultUtilisateurDelegue()
+    {
+        $lesDelegues = array();
+        $db = $this->dbConnect();
+        try {
+            // on prépare la requête select
+            $req = $db->prepare("select id, nom, prenom FROM utilisateur WHERE id_profil = 1");
+            // on demande l'exécution de la requête 
+            $req->execute();
+            // on récupere la valeur retournée par la requête 
+            $lesEnregs = $req->fetchAll();
+            foreach ($lesEnregs  as $enreg) {
+                $unDelegue = new Utilisateur(
+                    $enreg->id,
+                    $enreg->nom,
+                    $enreg->prenom,
+                    null,
+                    null,
+                    null,
+                    null,
+                );
+                array_push($lesDelegues, $unDelegue);
+            }
+        } catch (PDOException $e) {
+            die("BDselprofil: erreur liste délégué 
+                            <br>Erreur :" . $e->getMessage());
+        }
+        return $lesDelegues;
+    }
 }

@@ -98,4 +98,12 @@ class UtilisateurController extends Controller
         }
         $this->render("utilisateur/ajoutUtilisateur", array("title" => "Ajout d'un utilisateur", "msg" => $msg));
     }
+
+    public function consultDelegueDeplacementPharmacieListeForm()
+    {
+        $unUtilisateurDelegueRepository = new UtilisateurRepository();
+        $lesDelegues = $unUtilisateurDelegueRepository->consultUtilisateurDelegue();
+
+        $this->render("deplacementPharmacie/deplacementDelegueListe", array("title" => "Liste des délégués qui vont chez des pharmacies", "lesDelegues" => $lesDelegues));
+    }
 }

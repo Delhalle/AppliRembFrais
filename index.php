@@ -43,6 +43,59 @@ if (isset($_GET['action'])) {
             $leControleur = new DemandeRemboursementController();
             $leControleur->ajoutDemandeRemboursementTrait();
             break;
+        case "ajoutDeplacementPharmForm":
+            // demande du formulaire d'ajout d'un déplacement chez une pharmacie
+            require(ROOT . "/controller/Controller.php");
+            require(ROOT . "/controller/DeplacementPharmacieController.php");
+            $leControleur = new DeplacementPharmacieController();
+            $leControleur->ajoutDeplacementPharmacieForm();
+            break;
+        case "ajoutDeplacementPharmTrait":
+            // le formulaire d'ajout d'un déplacement chez un médecin a été soumis.
+            // Vérification et enregistrement des informations saisies
+            require(ROOT . "/controller/Controller.php");
+            require(ROOT . "/controller/DeplacementPharmacieController.php");
+            $leControleur = new DeplacementPharmacieController();
+            $leControleur->ajoutDeplacementPharmacieTrait();
+            break;
+        case "consultDelegueDeplacementPharmListeForm":
+            // demande du formulaire permettant d'obtenir la liste des
+            // demande de remboursement en vue d'une modification
+            require(ROOT . "/controller/Controller.php");
+            require(ROOT . "/controller/UtilisateurController.php");
+            $leControleur = new UtilisateurController();
+            $leControleur->consultDelegueDeplacementPharmacieListeForm();
+            break;
+        case "consultDelegueDeplacementPharm":
+            // affichage des demandes de remboursements saisies par le délegué
+            require(ROOT . "/controller/Controller.php");
+            require(ROOT . "/controller/DeplacementPharmacieController.php");
+            $leControleur = new DeplacementPharmacieController();
+            $leControleur->consultDelegueDeplacementPharm();
+            break;
+        case "modifDeplacementPharmListeForm":
+            // demande du formulaire permettant d'obtenir la liste des
+            // demande de remboursement en vue d'une modification
+            require(ROOT . "/controller/Controller.php");
+            require(ROOT . "/controller/DeplacementPharmacieController.php");
+            $leControleur = new DeplacementPharmacieController();
+            $leControleur->modifDeplacementPharmListeForm();
+            break;
+        case "modifDeplacementPharmForm":
+            // demande du formulaire de modification d'une demande de remboursement
+            require(ROOT . "/controller/Controller.php");
+            require(ROOT . "/controller/DeplacementPharmacieController.php");
+            $leControleur = new DeplacementPharmacieController();
+            $leControleur->modifDeplacementPharmForm();
+            break;
+        case "modifDeplacementPharmTrait":
+            // le formulaire de modification d'une demande de remboursement a été soumis.
+            // Vérification et enregistrement des informations saisies
+            require(ROOT . "/controller/Controller.php");
+            require(ROOT . "/controller/DeplacementPharmacieController.php");
+            $leControleur = new DeplacementPharmacieController();
+            $leControleur->modifDeplacementPharmacieTrait();
+            break;  
         case "modifDemRembListeForm":
             // demande du formulaire permettant d'obtenir la liste des
             // demande de remboursement en vue d'une modification
