@@ -121,6 +121,7 @@ class UtilisateurRepository extends Repository
 
         array_push($lesUtilisateurs, $unUtilisateur);
         return $lesUtilisateurs;
+    }
 
     public function getLesDelegues()
     {
