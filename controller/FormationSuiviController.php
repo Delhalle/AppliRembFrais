@@ -51,7 +51,7 @@ class FormationSuiviController extends Controller
     session_start();
     $id = $_SESSION['id'];
     $uneFormationSuiviRepository = new FormationSuiviRepository();
-    $lesFormSuivi = $uneFormationSuiviRepository->getLesFormationSuivi($id);
+    $lesFormSuivi = $uneFormationSuiviRepository->getMesFormationsSuivi($id);
 
     $this->render("formationSuivi/ajoutFormationSuivi", array("title" => "Liste des formation suivi", "lesFormationSuivi"=>$lesFormSuivi));
     }
