@@ -25,4 +25,35 @@ class FormationSuiviRepository extends Repository
         }
         return $ret;
     }
+
+    public function getMesFormationsSuivi($idDelegue = null)
+    {
+        
+        $lesFormSuivi = array();
+        $db = $this->dbConnect();
+        $req = $db->prepare("select formation_suivi.id as id, 
+                        DATE_FORMAT(date_saisie, '%d/%m/%Y') as date_saisie, 
+                        formation.formation, commentaire
+                        from formation_suivi 
+                        join formation on formation.id = id_formation 
+                        where id_delegue = :par_id_delegue");
+        $req->bindValue(':par_id_delegue', $idDelegue, PDO::PARAM_INT);
+        // on demande l'exécution de la requête 
+        $req->execute();
+        $lesEnregs = $req->fetchAll();
+        foreach ($lesEnregs  as $enreg) {
+            $uneFormSuivi = new FormationSuivi(
+                $enreg->id,
+                $enreg->date_saisie,
+                $enreg->commentaire,
+                new Formation(null, $enreg->formation),
+                null
+            );
+
+            array_push($lesFormSuivi, $uneFormSuivi);
+        }
+        return $lesFormSuivi;
+    }
 }
+
+

@@ -49,11 +49,10 @@ class FormationSuiviController extends Controller
     public function consultMesFormationSuivi()
     {
     session_start();
-    $id = $_SESSION['id'];
     $uneFormationSuiviRepository = new FormationSuiviRepository();
-    $lesFormSuivi = $uneFormationSuiviRepository->getMesFormationsSuivi($id);
+    $lesFormSuivi = $uneFormationSuiviRepository->getMesFormationsSuivi($_POST["listDel"]);
 
-    $this->render("formationSuivi/ajoutFormationSuivi", array("title" => "Liste des formation suivi", "lesFormationSuivi"=>$lesFormSuivi));
+    $this->render("formationSuivi/consultFormationSuivi", array("title" => "Liste des formation suivi", "lesFormationSuivi"=>$lesFormSuivi));
     }
 }
     

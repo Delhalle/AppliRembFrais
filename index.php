@@ -120,11 +120,18 @@ if (isset($_GET['action'])) {
             break;
         case "ajoutFormSuiviTrait":
             // demande du formulaire permettant d'obtenir la liste des
-            // demande de remboursement en vue d'une modification
+            // Formation suivi en vue d'une modification
             require(ROOT . "/controller/Controller.php");
             require(ROOT . "/controller/FormationSuiviController.php");
             $leControleur = new FormationSuiviController();
             $leControleur->ajoutFormationSuiviTrait();
+            break;
+        case "consultFormationSuivi":
+            // affichage des formation suivi saisies par le délegué
+            require(ROOT . "/controller/Controller.php");
+            require(ROOT . "/controller/FormationSuiviController.php");
+            $leControleur = new FormationSuiviController();
+            $leControleur->consultMesFormationSuivi();
             break;
         case "accueil":
             // action contient accueil (choix de l'option accueil dans le menu)

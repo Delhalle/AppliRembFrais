@@ -2,7 +2,7 @@
 <h2 class="text-center">Vos formation suivi</h2>
 
 <?php
-if (count($lesFormSuivi) == 0) {
+if (count($lesFormationSuivi) == 0) {
     echo ("Vous n'avez saisi aucune formation suivi");
 } else {
 ?>
