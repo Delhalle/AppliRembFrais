@@ -27,7 +27,6 @@ class FormationSuiviController extends Controller
             null,
             date('Y-m-d H:i:s'),
             $_POST['commentaire'],
-            $_POST['note'],
             new Formation($_POST['formation'],null),
             new Utilisateur($idUtilConnecte)
         );
@@ -44,7 +43,7 @@ class FormationSuiviController extends Controller
         //
         $formationRepository = new FormationRepository();
         $lesFormations = $formationRepository->getLesFormations();
-        $this->render("FormationSuivi/ajoutFormationSuivi", array ("title" => "Ajout d'une formation suivi", "lesUtilisateurs"=>$lesFormations, "msg" => $msg));
+        $this->render("FormationSuivi/ajoutFormationSuivi", array ("title" => "Ajout d'une formation suivi", "lesFormations"=>$lesFormations, "msg" => $msg));
     }
     
     public function consultMesFormationSuivi()

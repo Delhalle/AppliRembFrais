@@ -7,12 +7,6 @@
         </div>
     </div>
     <div class="row mb-3">
-        <label for="commentaire" class="col-lg-4 col-form-label">Note</label>
-        <div class="col-sm-12">
-            <input type="number" class="form-control" name="note" value="<?php if (isset($_POST['note']) == true) echo $_POST['note']; ?>" id="note">
-        </div>
-    </div>
-    <div class="row mb-3">
         <label for="formation" class="col-lg-4 col-form-label">Nom de la formation</label>
         <div class="col-sm-12">
             <!-- liste déroulante -->

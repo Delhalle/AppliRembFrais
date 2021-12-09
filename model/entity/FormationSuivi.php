@@ -4,16 +4,14 @@ class FormationSuivi
     private ?int $id;
 	private ?string $dateSaisie;
     private ?string $commentaire;
-	private ?int $note;
 	private ?Formation $laFormation;
 	private ?Utilisateur $leDelegue;
     
-    public function __construct($id, $dateSaisie, $commentaire, $note, $laFormation, $leDelegue)
+    public function __construct($id, $dateSaisie, $commentaire, $laFormation, $leDelegue)
     {
         $this->id = $id;
 		$this->dateSaisie = $dateSaisie;
         $this->commentaire = $commentaire;
-		$this->note = $note;
 		$this->laFormation = $laFormation;
 		$this->leDelegue = $leDelegue;
     }
@@ -41,14 +39,6 @@ class FormationSuivi
 	public function setCommentaire($commentaire)
 	{
 		$this->commentaire = $commentaire;
-	}
-    public function getNote()
-	{
-		return $this->note;
-	}
-	public function setNote($note)
-	{
-		$this->note = $note;
 	}
     public function getFormation()
 	{
