@@ -3,20 +3,18 @@
 <form action="index.php?action=consultFormationForm" method='post'>
     <div class="row mb-3">
         <?php
-        if (count($lesDemandes) == 0) {
-            echo ("L'utilisateur n'a pas saisie de formation suivi");
+        if (count($lesDelegues) == 0) {
+            echo ("Aucun utilisateur à saisie de formation");
         } else {
         ?>
-            <label for="lesDem" class="col-lg-4 col-form-label">Choisissez le délégués médicaux</label>
+           <label for="lesDel" class="col-lg-4 col-form-label">Choisissez le délégué qui a suivi une formation ou plusieurs</label>
             <div class="col-sm-12">
                 <!-- liste déroulante -->
                 <select class="form-select form-select-md" onChange="submit();" name="listDel">
-                    <?php foreach ($lesFormationsSuivi as $uneFormationSuivi) {
-                        $id = $uneFormationSuivi->getId();
-                        $nom = $uneFormationSuivi->getDelegue()->getNom() . ' , Service : ' . $uneFormationSuivi->getDelegue()->getPrenom();
-                        if (isset($_POST['listFormSuivi']) == true && $_POST['listFormSuivi'] == $id)
-                            echo ("<option selected value=$id>$nom</option>");
-                        else
+                <option value=""></option>
+                    <?php foreach ($lesDelegues as $unDelegue) {
+                        $id = $unDelegue->getId();
+                        $nom = $unDelegue->getNom() . ' ' . $unDelegue->getPrenom();
                             echo ("<option value=$id>$nom</option>");
                     } ?>
                 </select>

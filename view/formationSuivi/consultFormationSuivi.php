@@ -3,7 +3,7 @@
 
 <?php
 if (count($lesFormationSuivi) == 0) {
-    echo ("Vous n'avez saisi aucune formation suivi");
+    echo ("L'utilisateur n'a pas suivi de formation");
 } else {
 ?>
     <table class="table table-bordered table-lg">

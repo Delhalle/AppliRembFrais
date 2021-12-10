@@ -46,13 +46,13 @@ class FormationSuiviController extends Controller
         $this->render("FormationSuivi/ajoutFormationSuivi", array ("title" => "Ajout d'une formation suivi", "lesFormations"=>$lesFormations, "msg" => $msg));
     }
     
-    public function consultMesFormationSuivi()
+    public function consultLesFormationsSuivi()
     {
-    session_start();
-    $uneFormationSuiviRepository = new FormationSuiviRepository();
-    $lesFormSuivi = $uneFormationSuiviRepository->getMesFormationsSuivi($_POST["listDel"]);
+        
+        $uneFormationSuiviRepository = new FormationSuiviRepository();
+        $lesFormations = $uneFormationSuiviRepository->getLesFormationsSuivi($_POST["listDel"]);
 
-    $this->render("formationSuivi/consultFormationSuivi", array("title" => "Liste des formation suivi", "lesFormationSuivi"=>$lesFormSuivi));
+        $this->render("formationSuivi/consultFormationSuivi", array("title" => "Liste des formation", "lesFormations" => $lesFormations));
     }
 }
     
