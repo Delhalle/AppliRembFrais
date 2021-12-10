@@ -50,9 +50,9 @@ class FormationSuiviController extends Controller
     {
         
         $uneFormationSuiviRepository = new FormationSuiviRepository();
-        $lesFormations = $uneFormationSuiviRepository->getLesFormationsSuivi($_POST["listDel"]);
+        $lesFormationsSuivi = $uneFormationSuiviRepository->getLesFormationsSuivi($_POST["listDel"]);
 
-        $this->render("formationSuivi/consultFormationSuivi", array("title" => "Liste des formation", "lesFormations" => $lesFormations));
+        $this->render("formationSuivi/consultFormSuivi", array("title" => "Liste des formation", "lesFormationsSuivi" => $lesFormationsSuivi));
     }
 }
     
