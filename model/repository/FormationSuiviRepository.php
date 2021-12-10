@@ -26,10 +26,10 @@ class FormationSuiviRepository extends Repository
         return $ret;
     }
 
-    public function getMesFormationsSuivi($idDelegue = null)
+    public function getLesFormationsSuivi($idDelegue = null)
     {
         
-        $lesFormSuivi = array();
+        $lesFormationSuivi = array();
         $db = $this->dbConnect();
         $req = $db->prepare("select formation_suivi.id as id, 
                         DATE_FORMAT(date_saisie, '%d/%m/%Y') as date_saisie, 
@@ -50,9 +50,9 @@ class FormationSuiviRepository extends Repository
                 null
             );
 
-            array_push($lesFormSuivi, $uneFormSuivi);
+            array_push($lesFormationSuivi, $uneFormSuivi);
         }
-        return $lesFormSuivi;
+        return $lesFormationSuivi;
     }
 }
 

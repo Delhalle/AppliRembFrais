@@ -126,12 +126,19 @@ if (isset($_GET['action'])) {
             $leControleur = new FormationSuiviController();
             $leControleur->ajoutFormationSuiviTrait();
             break;
-        case "consultFormationSuivi":
-            // affichage des formation suivi saisies par le délegué
+        case "consulFormSuiviList":
+            // affichage des formations suivi pour le délegué choisis
+            require(ROOT . "/controller/Controller.php");
+            require(ROOT . "/controller/UtilisateurController.php");
+            $leControleur = new UtilisateurController();
+            $leControleur->consultLesDeleguesFormListe();
+            break;
+        case "consultFormSuivi":
+            // affichage des visites pour le délegué choisis
             require(ROOT . "/controller/Controller.php");
             require(ROOT . "/controller/FormationSuiviController.php");
             $leControleur = new FormationSuiviController();
-            $leControleur->consultMesFormationSuivi();
+            $leControleur->consultLesFormationsSuivi();
             break;
         case "accueil":
             // action contient accueil (choix de l'option accueil dans le menu)
