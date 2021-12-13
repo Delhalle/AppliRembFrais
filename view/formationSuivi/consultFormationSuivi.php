@@ -2,7 +2,7 @@
 <h2 class="text-center">Vos formation suivi</h2>
 
 <?php
-if (count($lesFormationSuivi) == 0) {
+if (count($lesFormationsSuivi) == 0) {
     echo ("L'utilisateur n'a pas suivi de formation");
 } else {
 ?>
@@ -11,11 +11,10 @@ if (count($lesFormationSuivi) == 0) {
             <tr>
                 <th class="col">date de saisie</th>
                 <th scope="col">type de frais</th>
-                <th scope="col">montant</th>
                 <th scope="col">commentaire</th>
             </tr>
         </thead>
-        <?php foreach ($lesFormSuivi as $uneFormSuivi) {
+        <?php foreach ($lesFormationsSuivi as $uneFormSuivi) {
             echo ("<tr>");
             echo ("<td>" . $uneFormSuivi->getDateSaisie() . "</td>");
             echo ("<td>" . $uneFormSuivi->getFormation()->getFormation() . "</td>");

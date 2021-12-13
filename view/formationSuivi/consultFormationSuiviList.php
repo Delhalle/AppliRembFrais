@@ -1,6 +1,6 @@
 <!-- code html de la page-->
 <h1 class="text-center">Consultation d'une formation suivie</h1>
-<form action="index.php?action=consultFormationForm" method='post'>
+<form action="index.php?action=consulFormSuivi" method='post'>
     <div class="row mb-3">
         <?php
         if (count($lesDelegues) == 0) {
