@@ -55,6 +55,7 @@ class DemandeRemboursementController extends Controller
 
         $this->render("demandeRemboursement/modifDemandeListe", array("title" => "Liste des demandes de remboursement", "lesDemandes" => $lesDemandes));
     }
+
     public function modifDemandeRemboursementForm()
     {
         //
@@ -70,6 +71,7 @@ class DemandeRemboursementController extends Controller
         //
         $this->render("demandeRemboursement/modifDemande", array("title" => "Modification d'une demande de remboursement", "lesTypesFrais" => $lesTypesFrais, "laDemande" => $laDemandeAModifier));
     }
+
 
     public function modifDemandeRemboursementTrait()
     {
@@ -99,6 +101,8 @@ class DemandeRemboursementController extends Controller
             $this->render("demandeRemboursement/modifDemandeListe", array("title" => "Liste des demandes de remboursement", "lesDemandes" => $lesDemandes, "msg" => $msg));
         }
     }
+
+    
     public function consultMesDemandeRemboursement()
     {
         session_start();

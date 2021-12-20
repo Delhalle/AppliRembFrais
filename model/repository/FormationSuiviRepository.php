@@ -26,6 +26,104 @@ class FormationSuiviRepository extends Repository
         return $ret;
     }
 
+
+    
+
+    public function modifFormationSuivi(FormationSuivi $formSuiviAModif)
+    {
+        $db = $this->dbConnect();
+        try {
+            // on prépare la requête select
+            $req = $db->prepare("update formationSuivi 
+            set  commentaire = :par_commentaire,
+            id_formation=:par_id_formation, id_delegue=:par_id_delegue
+            where id = :par_id_formSuivi");
+            // on affecte une valeur au paramètre déclaré dans la requête 
+            // récupération de la date du jour 
+            $req->bindValue(':par_commentaire', $formSuiviAModif->getCommentaire(), PDO::PARAM_STR);
+            $req->bindValue(':par_id_formation', $formSuiviAModif->getFormation()->getId(), PDO::PARAM_INT);
+            $req->bindValue(':par_id_delegue', $formSuiviAModif->getDelegue()->getId(), PDO::PARAM_INT);
+            $req->bindValue(':par_id_formSuivi', $formSuiviAModif->getId(), PDO::PARAM_INT);
+            // on demande l'exécution de la requête 
+            $ret = $req->execute();
+
+            $ret = true;
+        } catch (PDOException $e) {
+            $ret = false;
+        }
+
+        return $ret;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function getMesFormationsSuivi($idDelegue)
+    {
+        
+        $lesFormationsSuivi = array();
+        $db = $this->dbConnect();
+        $req = $db->prepare("select formation_suivi.id as id, 
+                        DATE_FORMAT(date_saisie, '%d/%m/%Y') as date_saisie, 
+                        formation.formation, commentaire
+                        from formation_suivi 
+                        join formation on formation.id = id_formation 
+                        where id_delegue = :par_id_delegue");
+        $req->bindValue(':par_id_delegue', $idDelegue, PDO::PARAM_INT);
+        // on demande l'exécution de la requête 
+        $req->execute();
+        $lesEnregs = $req->fetchAll();
+        foreach ($lesEnregs  as $enreg) {
+            $uneFormSuivi = new FormationSuivi(
+                $enreg->id,
+                $enreg->date_saisie,
+                $enreg->commentaire,
+                new Formation(null, $enreg->formation),
+                null
+            );
+
+            array_push($lesFormationsSuivi, $uneFormSuivi);
+        }
+        return $lesFormationsSuivi;
+    }
+
+    public function getUneFormationSuivi($idFormSuivi)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare("select formation_suivi.id,id_formation,commentaire from formation_suivi 
+        join formation on formation.id = id_formation where formation_suivi.id = :par_id");
+        // on affecte une valeur au paramètre déclaré dans la requête 
+        $req->bindValue(':par_id', $idFormSuivi, PDO::PARAM_INT);
+        // on demande l'exécution de la requête 
+        $req->execute();
+        $enreg = $req->fetch();
+        $uneFormSuivi = new FormationSuivi(
+            $enreg->id,
+            null,
+            $enreg->commentaire,
+            new Formation($enreg->id_formation, null),
+            null
+        );
+        return $uneFormSuivi;
+    }
+
     public function getLesFormationsSuivi($idDelegue = null)
     {
         

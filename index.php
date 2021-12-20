@@ -140,6 +140,33 @@ if (isset($_GET['action'])) {
             $leControleur = new UtilisateurController();
             $leControleur->consultLesDeleguesFormListe();
             break;
+
+
+        case "modifFormSuiviListeForm":
+            // demande du formulaire permettant d'obtenir la liste des
+            // demande de remboursement en vue d'une modification
+            require(ROOT . "/controller/Controller.php");
+            require(ROOT . "/controller/formationSuiviController.php");
+            $leControleur = new formationSuiviController();
+            $leControleur->modifFormationSuiviListeForm();
+            break;
+        case "modifFormSuiviForm":
+            // demande du formulaire de modification d'une demande de remboursement
+            require(ROOT . "/controller/Controller.php");
+            require(ROOT . "/controller/formationSuiviController.php");
+            $leControleur = new formationSuiviController();
+            $leControleur->modifFormationSuiviForm();
+            break;
+        case "modifFormSuiviTrait":
+            // le formulaire de modification d'une demande de remboursement a été soumis.
+            // Vérification et enregistrement des informations saisies
+            require(ROOT . "/controller/Controller.php");
+            require(ROOT . "/controller/formationSuiviController.php");
+            $leControleur = new formationSuiviController();
+            $leControleur->modifFormationSuiviTrait();
+            break;
+
+
         case "accueil":
             // action contient accueil (choix de l'option accueil dans le menu)
             afficheFormConnexion();
