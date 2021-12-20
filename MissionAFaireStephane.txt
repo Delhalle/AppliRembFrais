@@ -1,8 +1,0 @@
-Les formations obligatoires :
-Dans le cadre de la formation continue des délégués médicaux, GSB propose des
-formations à tous ses employés (formation en communication, formation en anglais,
-formation sur la gestion du stress, etc.)
-Les délégués médicaux doivent pouvoir saisir les formations qu’ils ont suivies (numéro de la
-formation suivie, avis sur la formation), et le responsable de la comptabilité devra disposer
-d’une fonctionnalité lui permettant d’obtenir les formations saisies par délégué médical de
-son choix.
