@@ -43,7 +43,7 @@ class FormationSuiviController extends Controller
         //
         $formationRepository = new FormationRepository();
         $lesFormations = $formationRepository->getLesFormations();
-        $this->render("FormationSuivi/ajoutFormationSuivi", array ("title" => "Ajout d'une formation suivi", "lesFormations"=>$lesFormations, "msg" => $msg));
+        $this->render("formationSuivi/ajoutFormationSuivi", array ("title" => "Ajout d'une formation suivi", "lesFormations"=>$lesFormations, "msg" => $msg));
     }
     
     public function consultLesFormationsSuivi()
