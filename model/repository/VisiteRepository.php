@@ -37,7 +37,8 @@ class VisiteRepository extends Repository
                         from visite 
                         join medecin on medecin.id = id_medecin
                         join utilisateur on utilisateur.id = id_delegue
-                        where utilisateur.id =" . $idDelegue);
+                        where utilisateur.id = :par_id_delegue");
+        $req->bindValue(':par_id_delegue', $idDelegue, PDO::PARAM_INT);
         // on demande l'exécution de la requête 
         $req->execute();
         $lesEnregs = $req->fetchAll();
