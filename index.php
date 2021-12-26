@@ -59,6 +59,8 @@ if (isset($_GET['action'])) {
             $leControleur = new VisiteController();
             $leControleur->ajoutVisiteTrait();
             break;
+
+            
         case "modifDemRembListeForm":
             // demande du formulaire permettant d'obtenir la liste des
             // demande de remboursement en vue d'une modification
@@ -82,6 +84,10 @@ if (isset($_GET['action'])) {
             $leControleur = new DemandeRemboursementController();
             $leControleur->modifDemandeRemboursementTrait();
             break;
+
+
+
+
         case "consultMesDemRemb":
             // affichage des demandes de remboursements saisies par le délegué
             require(ROOT . "/controller/Controller.php");
