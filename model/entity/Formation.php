@@ -18,7 +18,7 @@ class Formation
 	{
 		$this->id = $id;
 	}
-    public function getformation()
+    public function getFormation()
 	{
 		return $this->formation;
 	}
