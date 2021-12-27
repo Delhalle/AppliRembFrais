@@ -1,6 +1,6 @@
 <!-- code html de la page-->
 <h1 class="text-center">Modification d'une formation suivi</h1>
-<form action="index.php?action=modifFormSuiviListForm" method='post'>
+<form action="index.php?action=modifFormSuiviForm" method='post'>
     <div class="row mb-3">
         <?php
         if (count($lesFormationsSuivi) == 0) {

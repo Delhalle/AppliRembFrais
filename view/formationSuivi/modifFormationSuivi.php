@@ -6,7 +6,6 @@
         <div class="col-sm-12">
             <input type="text" class="form-control" name="commentaire" value="<?php if ($laFormSuivi != null) echo $laFormSuivi->getCommentaire(); ?>" id="comment">
         </div>
-    </div>
     <div class="row mb-3">
         <label for="formation" class="col-lg-4 col-form-label">Formation</label>
         <div class="col-sm-12">

@@ -83,25 +83,25 @@ class FormationSuiviController extends Controller
         $uneFormationSuiviRepository = new FormationSuiviRepository();
         session_start();
         $idUtilConnecte = $_SESSION['id'];
-        $laFormSuivi = new FormationSuivi(
+        $laFormSuiviAModifier = new FormationSuivi(
             $_POST['idFormSuivi'],
             date('Y-m-d H:i:s'),
             $_POST['commentaire'],
-            new TypeFrais($_POST['formation'], null),
+            new Formation($_POST['formation'], null),
             new Utilisateur($idUtilConnecte)
         );
         $uneFormationSuiviRepository = new FormationSuiviRepository();
-        $ret = $uneFormationSuiviRepository->modifFormationSuivi($laFormSuivi);
+        $ret = $uneFormationSuiviRepository->modifFormationSuivi($laFormSuiviAModifier);
         if ($ret == false) {
             $msg = "modification impossible";
             $formationRepository = new formationRepository();
             $lesFormations = $formationRepository->getlesFormations();
-            $this->render("formationSuivi/modifFormSuivi", array("title" => "Modification d'une formation suivi", "lesFormations" => $lesFormations,  "laFormSuivi" => $laFormSuivi, "msg" => $msg));
+            $this->render("formationSuivi/modifFormationSuivi", array("title" => "Modification d'une formation suivi", "lesFormations" => $lesFormations, "laFormSuivi" => $laFormSuiviAModifier, "msg" => $msg));
         } else {
             $msg = "modification effectuée";
             $uneFormationSuiviRepository = new FormationSuiviRepository();
-            $lesFormationSuivi = $uneFormationSuiviRepository->getMesFormationsSuivi($idUtilConnecte);
-            $this->render("formationSuivi/modifFormSuiviListe", array("title" => "Liste des demandes de remboursement", "lesFormationSuivi" => $lesFormationSuivi, "msg" => $msg));
+            $lesFormationsSuivi = $uneFormationSuiviRepository->getMesFormationsSuivi($idUtilConnecte);
+            $this->render("formationSuivi/modifFormationSuiviList", array("title" => "Liste des formations suivi", "lesFormationsSuivi" => $lesFormationsSuivi, "msg" => $msg));
         }
     }
 

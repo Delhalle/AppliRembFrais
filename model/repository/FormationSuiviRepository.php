@@ -34,7 +34,7 @@ class FormationSuiviRepository extends Repository
         $db = $this->dbConnect();
         try {
             // on prépare la requête select
-            $req = $db->prepare("update formationSuivi 
+            $req = $db->prepare("update formation_suivi 
             set  commentaire = :par_commentaire,
             id_formation=:par_id_formation, id_delegue=:par_id_delegue
             where id = :par_id_formSuivi");
