@@ -1,4 +1,6 @@
 <?php
+
+namespace App\model\entity;
 class Formation
 {
     private ?int $id;

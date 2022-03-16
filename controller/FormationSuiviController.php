@@ -1,16 +1,15 @@
 <?php
+namespace App\controller;
+
+use App\model\repository\{FormationRepository,FormationSuiviRepository};
+use App\model\entity\{FormationSuivi, Formation,Utilisateur}; 
 
 class FormationSuiviController extends Controller
 {
     public function __construct()
     {
         parent::__construct();
-        require_once(ROOT . '/model/repository/FormationSuiviRepository.php');
-        require_once(ROOT . '/model/repository/UtilisateurRepository.php');
-        require_once(ROOT . '/model/repository/FormationRepository.php');
-        require_once(ROOT . '/model/entity/FormationSuivi.php');
-        require_once(ROOT . '/model/entity/Utilisateur.php');
-        require_once(ROOT . '/model/entity/Formation.php');
+
     }
     public function ajoutFormationSuiviForm()
     {

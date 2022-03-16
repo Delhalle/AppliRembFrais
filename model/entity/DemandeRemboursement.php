@@ -1,4 +1,5 @@
 <?php
+namespace App\model\entity;
 class DemandeRemboursement
 {
 	private ?int $id;

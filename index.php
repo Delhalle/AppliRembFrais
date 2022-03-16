@@ -1,35 +1,35 @@
 <?php
+use App\Autoloader;
+use App\Controller\{UtilisateurController, DemandeRemboursementController, VisiteController, FormationSuiviController};
+
+use function PHPSTORM_META\registerArgumentsSet;
+
+require_once "./Autoloader.php";
+Autoloader::register();
+
 define('ROOT', $_SERVER['DOCUMENT_ROOT']);
 if (isset($_GET['action'])) {
     switch ($_GET['action']) {
         case "ajoutUtilisateurForm":
             // demande du formulaire d'ajout d'un utilisateur
-            require(ROOT . "/controller/Controller.php");
-            require(ROOT . "/controller/UtilisateurController.php");
             $leControleur = new UtilisateurController();
             $leControleur->ajoutUtilisateurForm();
             break;
         case "ajoutUtilisateurTrait":
             // le formulaire d'ajout d'un utilisateur a été soumis.
             // Vérification et enregistrement des informations saisies
-            require(ROOT . "/controller/Controller.php");
-            require(ROOT . "/controller/UtilisateurController.php");
             $leControleur = new UtilisateurController();
             $leControleur->ajoutUtilisateurTrait();
             break;
         case "ajoutDemRembForm":
             
             // demande du formulaire d'ajout d'une demande de remboursement
-            require(ROOT . "/controller/Controller.php");
-            require(ROOT . "/controller/DemandeRemboursementController.php");
             $leControleur = new DemandeRemboursementController();
             $leControleur->ajoutDemandeRemboursementForm();
             break;
         case "ajoutDemRembTrait":
             // le formulaire d'ajout d'une demande de remboursement a été soumis.
             // Vérification et enregistrement des informations saisies
-            require(ROOT . "/controller/Controller.php");
-            require(ROOT . "/controller/DemandeRemboursementController.php");
             $leControleur = new DemandeRemboursementController();
             $leControleur->ajoutDemandeRemboursementTrait();
             break;
@@ -39,104 +39,76 @@ if (isset($_GET['action'])) {
             $idDelegue = $_SESSION['id'];
             //}
             if (isset($idDelegue) == false || $idDelegue == 0) {
-                require(ROOT . "/controller/Controller.php");
-                require(ROOT . "/controller/UtilisateurController.php");
                 $leControleur = new UtilisateurController();
                 $leControleur->connexionForm();
                 break;
             }
             // demande du formulaire d'ajout d'une visite
-            require(ROOT . "/controller/Controller.php");
-            require(ROOT . "/controller/VisiteController.php");
             $leControleur = new VisiteController();
             $leControleur->ajoutVisiteForm();
             break;
         case "ajoutVisiteTrait":
             // le formulaire d'ajout d'une visite a été soumis.
             // Vérification et enregistrement des informations saisies
-            require(ROOT . "/controller/Controller.php");
-            require(ROOT . "/controller/VisiteController.php");
             $leControleur = new VisiteController();
             $leControleur->ajoutVisiteTrait();
             break;
         case "modifDemRembListeForm":
             // demande du formulaire permettant d'obtenir la liste des
             // demande de remboursement en vue d'une modification
-            require(ROOT . "/controller/Controller.php");
-            require(ROOT . "/controller/DemandeRemboursementController.php");
             $leControleur = new DemandeRemboursementController();
             $leControleur->modifDemandeRemboursementListeForm();
             break;
         case "modifDemRembForm":
             // demande du formulaire de modification d'une demande de remboursement
-            require(ROOT . "/controller/Controller.php");
-            require(ROOT . "/controller/DemandeRemboursementController.php");
             $leControleur = new DemandeRemboursementController();
             $leControleur->modifDemandeRemboursementForm();
             break;
         case "modifDemRembTrait":
             // le formulaire de modification d'une demande de remboursement a été soumis.
             // Vérification et enregistrement des informations saisies
-            require(ROOT . "/controller/Controller.php");
-            require(ROOT . "/controller/demandeRemboursementController.php");
             $leControleur = new DemandeRemboursementController();
             $leControleur->modifDemandeRemboursementTrait();
             break;
         case "consultMesDemRemb":
             // affichage des demandes de remboursements saisies par le délegué
-            require(ROOT . "/controller/Controller.php");
-            require(ROOT . "/controller/DemandeRemboursementController.php");
             $leControleur = new DemandeRemboursementController();
             $leControleur->consultMesDemandeRemboursement();
             break;
         case "consultVisite":
             // affichage des visites pour le délegué choisis
-            require(ROOT . "/controller/Controller.php");
-            require(ROOT . "/controller/VisiteController.php");
             $leControleur = new VisiteController();
             $leControleur->consultLesVisites();
             break;
         case "consultVisiteListe":
             // affichage des visites pour le délegué choisis
-            require(ROOT . "/controller/Controller.php");
-            require(ROOT . "/controller/UtilisateurController.php");
             $leControleur = new UtilisateurController();
             $leControleur->consultLesDeleguesListe();
             break;
         case "connexionTrait":
             // le formulaire de connexion a été soumis. 
             // Vérification des informations saisies
-            require(ROOT . "/controller/Controller.php");
-            require(ROOT . "/controller/UtilisateurController.php");
             $leControleur = new UtilisateurController();
             $leControleur->connexionTrait($_POST);
             break;
         case "ajoutFormSuivi":
             // demande du formulaire d'ajout d'un utilisateur
-            require(ROOT . "/controller/Controller.php");
-            require(ROOT . "/controller/FormationSuiviController.php");
             $leControleur = new FormationSuiviController();
             $leControleur->ajoutFormationSuiviForm();
             break;
         case "ajoutFormSuiviTrait":
             // demande du formulaire permettant d'obtenir la liste des
             // Formation suivi en vue d'une modification
-            require(ROOT . "/controller/Controller.php");
-            require(ROOT . "/controller/FormationSuiviController.php");
             $leControleur = new FormationSuiviController();
             $leControleur->ajoutFormationSuiviTrait();
             break;
         case "consulFormSuivi":
             // affichage des formations suivi pour le délegué choisis
-            require(ROOT . "/controller/Controller.php");
-            require(ROOT . "/controller/FormationSuiviController.php");
             $leControleur = new FormationSuiviController();
             $leControleur->consultLesFormationsSuivi();
             break;
         case "consulFormSuiviList":
             // affichage des délegués à choisir
-            require(ROOT . "/controller/Controller.php");
-            require(ROOT . "/controller/UtilisateurController.php");
             $leControleur = new UtilisateurController();
             $leControleur->consultLesDeleguesFormListe();
             break;
@@ -155,8 +127,6 @@ if (isset($_GET['action'])) {
 }
 function afficheFormConnexion()
 {
-    require(ROOT . "/controller/Controller.php");
-    require(ROOT . "/controller/UtilisateurController.php");
     $leControleur = new UtilisateurController();
     $leControleur->connexionForm();
 }

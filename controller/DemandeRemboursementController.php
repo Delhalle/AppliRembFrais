@@ -1,15 +1,14 @@
 <?php
+namespace App\controller;
+
+use App\model\repository\{DemandeRemboursementRepository, TypeFraisRepository};
+use App\model\entity\{DemandeRemboursement, Utilisateur, TypeFrais};
 
 class DemandeRemboursementController extends Controller
 {
     public function __construct()
     {
         parent::__construct();
-        require_once(ROOT . '/model/repository/DemandeRemboursementRepository.php');
-        require_once(ROOT . '/model/repository/TypeFraisRepository.php');
-        require_once(ROOT . '/model/entity/DemandeRemboursement.php');
-        require_once(ROOT . '/model/entity/Utilisateur.php');
-        require_once(ROOT . '/model/entity/TypeFrais.php');
     }
     public function ajoutDemandeRemboursementForm()
     {

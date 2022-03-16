@@ -1,7 +1,10 @@
 <?php
+namespace App\model\repository;
 date_default_timezone_set('Europe/Paris');
 //class dont on a besoin (classe Repository.php obligatoire)
-require_once("Repository.php");
+use App\model\entity\{FormationSuivi, Formation};
+use PDO;
+use PDOException;
 
 class FormationSuiviRepository extends Repository
 {

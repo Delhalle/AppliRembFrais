@@ -1,16 +1,15 @@
 <?php
+namespace App\controller;
+
+use App\model\entity\{Visite, Medecin, Utilisateur};
+use App\model\repository\{MedecinRepository, VisiteRepository};
 
 class VisiteController extends Controller
 {
     public function __construct()
     {
         parent::__construct();
-        require_once(ROOT . '/model/repository/VisiteRepository.php');
-        require_once(ROOT . '/model/repository/MedecinRepository.php');
-        require_once(ROOT . '/model/repository/UtilisateurRepository.php');
-        require_once(ROOT . '/model/entity/Visite.php');
-        require_once(ROOT . '/model/entity/Utilisateur.php');
-        require_once(ROOT . '/model/entity/Medecin.php');
+
     }
     public function ajoutVisiteForm()
     {
@@ -27,7 +26,7 @@ class VisiteController extends Controller
             null,
             date('Y-m-d H:i:s'),
             $_POST['commentaire'],
-            new medecin($_POST['medecin'], null, null),
+            new Medecin($_POST['medecin'], null, null),
             new Utilisateur($idUtilConnecte)
         );
         $uneVisiteRepository = new VisiteRepository();
