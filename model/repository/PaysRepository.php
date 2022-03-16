@@ -1,12 +1,12 @@
 <?php
-//class dont on a besoin (classe Repository.php obligatoire)
+
 
 // require_once(ROOT . "/model/autoload.php");
 
 namespace AppliRembFraisControle\model\repository;
 
 use AppliRembFraisControle\model\entity\Pays;
-use Repository;
+use AppliRembFraisControle\model\repository\Repository;
 use PDO;
 
 

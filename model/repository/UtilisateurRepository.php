@@ -1,12 +1,13 @@
 <?php
-//class dont on a besoin (classe Repository.php obligatoire)
+
 namespace AppliRembFraisControle\model\repository;
 
 use AppliRembFraisControle\model\entity\Fonctionnalite;
 use AppliRembFraisControle\model\entity\Utilisateur;
 use PDOException;
 use AppliRembFraisControle\model\entity\Profil;
-use Repository;
+use AppliRembFraisControle\model\repository\Repository;
+
 use PDO;
 
 class UtilisateurRepository extends Repository

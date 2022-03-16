@@ -12,7 +12,6 @@ use AppliRembFraisControle\model\entity\{
 use AppliRembFraisControle\model\repository\{
 
     CongreRepository,
-
     PaysRepository,
     VilleRepository
 };

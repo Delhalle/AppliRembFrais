@@ -1,11 +1,11 @@
 <?php
-//class dont on a besoin (classe Repository.php obligatoire)
+
 namespace AppliRembFraisControle\model\repository;
 
 
 use AppliRembFraisControle\model\entity\Table;
 use Exception;
-use Repository;
+use AppliRembFraisControle\model\repository\Repository;
 use PDO;
 
 

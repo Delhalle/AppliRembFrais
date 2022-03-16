@@ -1,5 +1,10 @@
 <?php
 
+namespace AppliRembFraisControle\model\repository;
+
+use PDO;
+use PDOException;
+
 abstract class Repository
 {
 	protected $db;

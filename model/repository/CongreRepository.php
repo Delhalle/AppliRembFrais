@@ -1,5 +1,5 @@
 <?php
-//class dont on a besoin (classe Repository.php obligatoire)
+
 namespace AppliRembFraisControle\model\repository;
 
 
@@ -9,7 +9,7 @@ use AppliRembFraisControle\model\entity\Pays;
 use AppliRembFraisControle\model\entity\Utilisateur;
 use PDOException;
 use DateTime;
-use Repository;
+use AppliRembFraisControle\model\repository\Repository;
 use PDO;
 
 require_once(ROOT . "/model/repository/Repository.php");

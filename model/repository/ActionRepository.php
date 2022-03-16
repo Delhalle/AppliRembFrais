@@ -5,9 +5,9 @@ namespace AppliRembFraisControle\model\repository;
 
 use AppliRembFraisControle\model\entity\Action;
 use Exception;
-use Repository;
+use AppliRembFraisControle\model\repository\Repository;
 use PDO;
-//class dont on a besoin (classe Repository.php obligatoire)
+
 // require_once(ROOT . "/model/repository/Repository.php");
 // require_once(ROOT . "/model/entity/Action.php");
 

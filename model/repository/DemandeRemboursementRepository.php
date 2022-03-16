@@ -1,13 +1,13 @@
 <?php
-date_default_timezone_set('Europe/Paris');
-//class dont on a besoin (classe Repository.php obligatoire)
+
+
 
 namespace AppliRembFraisControle\model\repository;
 
 use AppliRembFraisControle\model\entity\DemandeRemboursement;
 use PDOException;
 use AppliRembFraisControle\model\entity\TypeFrais;
-use Repository;
+use AppliRembFraisControle\model\repository\Repository;
 use PDO;
 
 class DemandeRemboursementRepository extends Repository
