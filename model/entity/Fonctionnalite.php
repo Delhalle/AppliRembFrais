@@ -1,4 +1,7 @@
 <?php
+
+namespace AppliRembFraisControle\model\entity;
+
 class Fonctionnalite
 {
 	private ?int $id;

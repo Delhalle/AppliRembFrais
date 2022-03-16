@@ -1,4 +1,10 @@
 <?php
+
+namespace AppliRembFraisControle\model\entity;
+
+use AppliRembFraisControle\model\entity\TypeFrais;
+use AppliRembFraisControle\model\entity\Utilisateur;
+
 class DemandeRemboursement
 {
 	private ?int $id;

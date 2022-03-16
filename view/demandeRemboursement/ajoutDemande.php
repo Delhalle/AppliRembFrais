@@ -3,13 +3,13 @@
     <div class="row mb-3">
         <label for="montant" class="col-lg-4 col-form-label">Montant du remboursement</label>
         <div class="col-sm-12">
-            <input type="text" class="form-control" name="montant" value="<?php if (isset($_POST['montant']) == true) echo $_POST['montant']; ?>" id="montant">
+            <input type="text" class="form-control" required name="montant" value="<?php if (isset($_POST['montant']) == true) echo $_POST['montant']; ?>" id="montant">
         </div>
     </div>
     <div class="row mb-3">
         <label for="comment" class="col-lg-4 col-form-label">Commentaire</label>
         <div class="col-sm-12">
-            <input type="text" class="form-control" name="commentaire" id="comment">
+            <input type="text" class="form-control" name="commentaire" id="comment" required>
         </div>
     </div>
     <div class="row mb-3">

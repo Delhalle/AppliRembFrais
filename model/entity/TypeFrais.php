@@ -1,4 +1,7 @@
 <?php
+
+namespace AppliRembFraisControle\model\entity;
+
 class TypeFrais
 {
 	private ?int $id;

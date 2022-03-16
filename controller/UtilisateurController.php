@@ -1,12 +1,19 @@
 <?php
 
+namespace AppliRembFraisControle\controller;
+
+
+use AppliRembFraisControle\model\entity\{
+    Profil,
+    Utilisateur
+};
+use AppliRembFraisControle\model\repository\UtilisateurRepository;
+
 class UtilisateurController extends Controller
 {
     public function __construct()
     {
         parent::__construct();
-        require_once(ROOT . '/model/repository/UtilisateurRepository.php');
-        require_once(ROOT . '/model/entity/Utilisateur.php');
     }
     public function connexionTrait()
     {
@@ -21,7 +28,7 @@ class UtilisateurController extends Controller
                 // on enregistre dans une variable de session le nom et le prénom de l'employé
                 session_start();
                 $_SESSION['profil'] = $unUtilisateur->getProfil()->getId();
-                $utilisateurAff = $unUtilisateur->getNom()." ".$unUtilisateur->getPrenom();
+                $utilisateurAff = $unUtilisateur->getNom() . " " . $unUtilisateur->getPrenom();
                 $_SESSION['id'] = $unUtilisateur->getId();
                 $lesFonctionnalites = $utilRepository->fonctUtilisateur($unUtilisateur->getProfil()->getId());
                 $this->creerOptionsMenus($unUtilisateur->getProfil()->getId(), $lesFonctionnalites);
@@ -53,7 +60,7 @@ class UtilisateurController extends Controller
     }
     public function connexionForm()
     {
-        session_start();
+
         $_SESSION['nom_prenom'] = "";
         $_SESSION['profil'] = 0;
         $_SESSION['id'] = 0;
@@ -63,6 +70,17 @@ class UtilisateurController extends Controller
     {
         $this->render("utilisateur/ajoutUtilisateur", array("title" => "Ajout d'un utilisateur"));
     }
+    public function getLesUtilisateurs()
+    {
+        session_start();
+        $id = $_SESSION['id'];
+        $unUtilisateurRepository = new UtilisateurRepository();
+        $lesDemandes = $unUtilisateurRepository->getLesUtilisateurs();
+
+        $this->render("Utilisateur/consultFormation", array("title" => "Liste des congrès suivies par les délégués", "lesUtilisateurs" => $lesDemandes));
+    }
+
+
     public function ajoutUtilisateurTrait()
     {
         $idProfil = 4;
@@ -89,8 +107,11 @@ class UtilisateurController extends Controller
             new Utilisateur($idUtilConnecte)
         );
         $unUtilisateurRepository = new UtilisateurRepository();
-        $ret = $unUtilisateurRepository->ajoutUtilisateur($unUtilisateur);
-        if ($ret == false) {
+        $array = $unUtilisateurRepository->ajoutUtilisateur($unUtilisateur);
+        $id = $array[0];
+        $this->ajoutLog("INSERT", "utilisateur", $id);
+
+        if ($array[1] == false) {
             $msg = "<p class='text-danger'>ERREUR : l'utilisateur n'a pas été enregistré</p>";
         } else {
             $_POST = array();

@@ -1,7 +1,14 @@
 <?php
 date_default_timezone_set('Europe/Paris');
 //class dont on a besoin (classe Repository.php obligatoire)
-require_once("Repository.php");
+
+namespace AppliRembFraisControle\model\repository;
+
+use AppliRembFraisControle\model\entity\DemandeRemboursement;
+use PDOException;
+use AppliRembFraisControle\model\entity\TypeFrais;
+use Repository;
+use PDO;
 
 class DemandeRemboursementRepository extends Repository
 {
@@ -21,10 +28,17 @@ class DemandeRemboursementRepository extends Repository
             $req->bindValue(':par_id_delegue', $demACreer->getDelegue()->getId(), PDO::PARAM_INT);
             // on demande l'exécution de la requête 
             $ret = $req->execute();
+            $idDernAjout = $db->lastInsertId();
+            $Array = array();
+            array_push($Array, $idDernAjout);
+            array_push($Array, $ret);
         } catch (PDOException $e) {
             $ret = false;
+            die("BDselConnex: erreur ajout
+            <br>Erreur :" . $e->getMessage());
         }
-        return $ret;
+
+        return $Array;
     }
     public function modifDemandeRemboursement(DemandeRemboursement $demAModifier)
     {
@@ -32,28 +46,31 @@ class DemandeRemboursementRepository extends Repository
         try {
             // on prépare la requête select
             $req = $db->prepare("update demande_remboursement 
-            set  montant = :par_montant,
+            set  montant = :par_montant,commentaire = :par_com,
             id_type_frais=:par_id_type_frais, id_delegue=:par_id_delegue
             where id = :par_id_demande");
             // on affecte une valeur au paramètre déclaré dans la requête 
             // récupération de la date du jour 
             $req->bindValue(':par_montant', $demAModifier->getMontant(), PDO::PARAM_STR);
+            $req->bindValue(':par_com', $demAModifier->getCommentaire(), PDO::PARAM_STR);
             $req->bindValue(':par_id_type_frais', $demAModifier->getTypeFrais()->getId(), PDO::PARAM_INT);
             $req->bindValue(':par_id_delegue', $demAModifier->getDelegue()->getId(), PDO::PARAM_INT);
             $req->bindValue(':par_id_demande', $demAModifier->getId(), PDO::PARAM_INT);
             // on demande l'exécution de la requête 
             $ret = $req->execute();
-
+            $idDernAjout = $demAModifier->getId();
             $ret = true;
         } catch (PDOException $e) {
             $ret = false;
+            die("BDselConnex: erreur modif
+            <br>Erreur :" . $e->getMessage());
         }
 
         return $ret;
     }
     public function getMesDemandesRemboursement($idDelegue = null)
     {
-        
+
         $lesDemandes = array();
         $db = $this->dbConnect();
         $req = $db->prepare("select demande_remboursement.id as id, 

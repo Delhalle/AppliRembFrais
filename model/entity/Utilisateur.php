@@ -1,4 +1,9 @@
 ﻿<?php
+
+namespace AppliRembFraisControle\model\entity;
+
+use AppliRembFraisControle\model\entity\Profil;
+
 class Utilisateur
 {
 	private ?int $id;

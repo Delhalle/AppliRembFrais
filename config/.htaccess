@@ -1,0 +1,9 @@
+#LoadModule rewrite_module modules/mod_rewrite.so
+# On suit les liens symboliques 
+#Options +FollowSymlinks 
+# Activation du mod rewrite d'Apache 
+RewriteEngine On
+# Réécriture de index.html vers index.php 
+RewriteRule ^index\.html$ /index.php [L]
+# Réécriture des URL des articles 
+RewriteRule ^congres/ajoutCongres$ /index.php?action=ajoutCongresForm [L]

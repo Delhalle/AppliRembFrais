@@ -1,4 +1,10 @@
 <?php
+
+namespace AppliRembFraisControle\model\entity;
+
+use AppliRembFraisControle\model\entity\Profil;
+use AppliRembFraisControle\model\entity\Fonctionnalite;
+
 class ProfilFonct
 {
 

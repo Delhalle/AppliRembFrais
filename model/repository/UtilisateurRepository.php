@@ -1,9 +1,14 @@
 <?php
 //class dont on a besoin (classe Repository.php obligatoire)
-require_once(ROOT . "/model/repository/Repository.php");
-require_once(ROOT . "/model/entity/Utilisateur.php");
-require_once(ROOT . "/model/entity/Profil.php");
-require_once(ROOT . "/model/entity/Fonctionnalite.php");
+namespace AppliRembFraisControle\model\repository;
+
+use AppliRembFraisControle\model\entity\Fonctionnalite;
+use AppliRembFraisControle\model\entity\Utilisateur;
+use PDOException;
+use AppliRembFraisControle\model\entity\Profil;
+use Repository;
+use PDO;
+
 class UtilisateurRepository extends Repository
 {
     // fonction de connexion
@@ -39,7 +44,7 @@ class UtilisateurRepository extends Repository
                         $enreg->mot_de_passe,
                         new Profil($enreg->id_profil, null),
                         null
-                    );    
+                    );
                 }
             } catch (PDOException $e) {
                 die("BDselConnex: erreur vérification connexion 
@@ -98,9 +103,32 @@ class UtilisateurRepository extends Repository
             $req->bindValue(':par_id_dern_util', $utilACreer->getDerUtilAction()->getId(), PDO::PARAM_INT);
             // on demande l'exécution de la requête 
             $ret = $req->execute();
+            $idDernAjout = $db->lastInsertId();
+            $Array = array();
+            array_push($Array, $idDernAjout);
+            array_push($Array, $ret);
         } catch (PDOException $e) {
             $ret = false;
         }
-        return $ret;
+        return $Array;
+    }
+
+    public function getlesUtilisateurs()
+    {
+        $lesUtilisateurs = array();
+        $db = $this->dbConnect();
+        $req = $db->prepare("SELECT id, nom, prenom FROM Utilisateur order by nom");
+        $req->execute();
+        $lesEnregs = $req->fetchAll();
+        foreach ($lesEnregs  as $enreg) {
+            $unUtilisateur = new Utilisateur(
+                $enreg->id,
+                $enreg->nom,
+                $enreg->prenom,
+            );
+            array_push($lesUtilisateurs, $unUtilisateur);
+        }
+
+        return $lesUtilisateurs;
     }
 }

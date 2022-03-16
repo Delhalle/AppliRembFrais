@@ -1,15 +1,17 @@
 <?php
 
+namespace AppliRembFraisControle\controller;
+
+
+use AppliRembFraisControle\model\repository\{DemandeRemboursementRepository, TypeFraisRepository};
+use AppliRembFraisControle\model\entity\{DemandeRemboursement, TypeFrais, Utilisateur};
+use AppliRembFraisControle\controller\Controller;
+
 class DemandeRemboursementController extends Controller
 {
     public function __construct()
     {
         parent::__construct();
-        require_once(ROOT . '/model/repository/DemandeRemboursementRepository.php');
-        require_once(ROOT . '/model/repository/TypeFraisRepository.php');
-        require_once(ROOT . '/model/entity/DemandeRemboursement.php');
-        require_once(ROOT . '/model/entity/Utilisateur.php');
-        require_once(ROOT . '/model/entity/TypeFrais.php');
     }
     public function ajoutDemandeRemboursementForm()
     {
@@ -27,23 +29,27 @@ class DemandeRemboursementController extends Controller
             date('Y-m-d H:i:s'),
             $_POST['montant'],
             $_POST['commentaire'],
-            new TypeFrais($_POST['typeFrais'],null),
+            new TypeFrais($_POST['typeFrais'], ""),
             new Utilisateur($idUtilConnecte)
         );
         $uneDemandeRepository = new DemandeRemboursementRepository();
-        $ret = $uneDemandeRepository->ajoutDemandeRemboursement($laDemande);
+        $array = $uneDemandeRepository->ajoutDemandeRemboursement($laDemande);
+        $id = $array[0];
 
-        //
-        if ($ret == false) {
+        $this->ajoutLog("INSERT", "demande_remboursement", $id);
+
+
+
+        if ($array[1] == false) {
             $msg = "<p class='text-danger'>ERREUR : votre demande n'a pas été enregistrée</p>";
         } else {
             $_POST = array();
             $msg = "<p class='text-success'>Votre demande a été enregistrée</p>";
         }
-        //
+
         $typeFraisRepository = new TypeFraisRepository();
         $lesTypesFrais = $typeFraisRepository->getLesTypesFrais();
-        $this->render("demandeRemboursement/ajoutDemande", array("title" => "Ajout d'une demande de remboursement", "lesTypesFrais" => $lesTypesFrais, "msg" => $msg));
+        $this->render("demandeRemboursement/ajoutDemande", array("title" => "Ajout d'une demande de remboursement", "lesTypesFrais" => $lesTypesFrais));
     }
     public function modifDemandeRemboursementListeForm()
     {
@@ -86,7 +92,14 @@ class DemandeRemboursementController extends Controller
             new Utilisateur($idUtilConnecte)
         );
         $uneDemandeRepository = new DemandeRemboursementRepository();
+
         $ret = $uneDemandeRepository->modifDemandeRemboursement($laDemande);
+
+
+        $this->ajoutLog("UPDATE", "demande_remboursement", $_POST['idDemande']);
+
+
+
         if ($ret == false) {
             $msg = "modification impossible";
             $typeFraisRepository = new TypeFraisRepository();
@@ -99,6 +112,7 @@ class DemandeRemboursementController extends Controller
             $this->render("demandeRemboursement/modifDemandeListe", array("title" => "Liste des demandes de remboursement", "lesDemandes" => $lesDemandes, "msg" => $msg));
         }
     }
+
     public function consultMesDemandeRemboursement()
     {
         session_start();

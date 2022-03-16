@@ -1,4 +1,5 @@
 <?php
+
 abstract class Repository
 {
 	protected $db;

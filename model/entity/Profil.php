@@ -1,4 +1,8 @@
 ﻿<?php
+
+namespace AppliRembFraisControle\model\entity;
+
+
 class Profil
 {
 	private int $id;
