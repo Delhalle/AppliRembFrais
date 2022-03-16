@@ -135,13 +135,13 @@ if (isset($_GET['action'])) {
         case "accueil":
             // action contient accueil (choix de l'option accueil dans le menu)
 
-            $leControleur->afficheFormConnexion();
+            afficheFormConnexion();
 
             break;
         default:
             // action contient une valeur non connue : on affiche le formulaire de connexion
 
-            $leControleur->afficheFormConnexion();
+            afficheFormConnexion();
             break;
     }
 } else {
