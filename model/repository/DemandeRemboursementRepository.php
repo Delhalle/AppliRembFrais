@@ -1,7 +1,10 @@
 <?php
-date_default_timezone_set('Europe/Paris');
-//class dont on a besoin (classe Repository.php obligatoire)
-require_once("Repository.php");
+
+namespace App\model\repository;
+
+use App\model\repository\Repository;
+use App\model\entity\{DemandeRemboursement, TypeFrais};
+use PDO, PDOException;
 
 class DemandeRemboursementRepository extends Repository
 {
@@ -24,7 +27,11 @@ class DemandeRemboursementRepository extends Repository
         } catch (PDOException $e) {
             $ret = false;
         }
-        return $ret;
+        if ($ret != False){
+            $insertedId = $db->lastInsertId();
+            return [$ret, $insertedId];
+        }
+        return [$ret];
     }
     public function modifDemandeRemboursement(DemandeRemboursement $demAModifier)
     {
@@ -43,26 +50,22 @@ class DemandeRemboursementRepository extends Repository
             $req->bindValue(':par_id_demande', $demAModifier->getId(), PDO::PARAM_INT);
             // on demande l'exécution de la requête 
             $ret = $req->execute();
-
             $ret = true;
         } catch (PDOException $e) {
             $ret = false;
         }
-
         return $ret;
     }
     public function getMesDemandesRemboursement($idDelegue)
     {
-        
         $lesDemandes = array();
         $db = $this->dbConnect();
         $req = $db->prepare("select demande_remboursement.id as id, 
                         DATE_FORMAT(date_saisie, '%d/%m/%Y à %H:%i:%s') as date_saisie, 
                         type_frais.libelle,montant, commentaire
                         from demande_remboursement 
-                join type_frais on type_frais.id = id_type_frais where id_delegue = :par_id");
-        // on affecte une valeur au paramètre déclaré dans la requête 
-        $req->bindValue(':par_id', $idDelegue, PDO::PARAM_INT);
+                join type_frais on type_frais.id = id_type_frais
+                where id_delegue = " . $idDelegue);
         // on demande l'exécution de la requête 
         $req->execute();
         $lesEnregs = $req->fetchAll();
@@ -75,7 +78,6 @@ class DemandeRemboursementRepository extends Repository
                 new TypeFrais(null, $enreg->libelle),
                 null
             );
-
             array_push($lesDemandes, $uneDemande);
         }
         return $lesDemandes;

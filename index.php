@@ -1,19 +1,21 @@
 <?php
+use App\Autoloader;
+use App\Controller\{UtilisateurController,DemandeRemboursementController,DeplacementPharmacieController};
+
+require_once "./autoloader.php";
+Autoloader::register();
+
 define('ROOT', $_SERVER['DOCUMENT_ROOT']);
 if (isset($_GET['action'])) {
     switch ($_GET['action']) {
         case "ajoutUtilisateurForm":
             // demande du formulaire d'ajout d'un utilisateur
-            require(ROOT . "/controller/Controller.php");
-            require(ROOT . "/controller/UtilisateurController.php");
             $leControleur = new UtilisateurController();
             $leControleur->ajoutUtilisateurForm();
             break;
         case "ajoutUtilisateurTrait":
             // le formulaire d'ajout d'un utilisateur a été soumis.
             // Vérification et enregistrement des informations saisies
-            require(ROOT . "/controller/Controller.php");
-            require(ROOT . "/controller/UtilisateurController.php");
             $leControleur = new UtilisateurController();
             $leControleur->ajoutUtilisateurTrait();
             break;
@@ -39,12 +41,13 @@ if (isset($_GET['action'])) {
             $idDelegue = $_SESSION['id'];
             //}
             if (isset($idDelegue) == false || $idDelegue == 0) {
-                require(ROOT . "/controller/Controller.php");
-                require(ROOT . "/controller/UtilisateurController.php");
                 $leControleur = new UtilisateurController();
                 $leControleur->connexionForm();
                 break;
             }
+            // demande du formulaire d'ajout d'une demande de remboursement
+            $leControleur = new DemandeRemboursementController();
+            $leControleur->ajoutDemandeRemboursementForm();
             // demande du formulaire d'ajout d'une visite
             require(ROOT . "/controller/Controller.php");
             require(ROOT . "/controller/VisiteController.php");
@@ -54,33 +57,67 @@ if (isset($_GET['action'])) {
         case "ajoutVisiteTrait":
             // le formulaire d'ajout d'une visite a été soumis.
             // Vérification et enregistrement des informations saisies
+            $leControleur = new DemandeRemboursementController();
+            $leControleur->ajoutDemandeRemboursementTrait();
+            break;
+        case "ajoutDeplacementPharmForm":
+            // demande du formulaire d'ajout d'un déplacement chez une pharmacie
+            $leControleur = new DeplacementPharmacieController();
+            $leControleur->ajoutDeplacementPharmacieForm();
+            break;
+        case "ajoutDeplacementPharmTrait":
+            // le formulaire d'ajout d'un déplacement chez un médecin a été soumis.
+            // Vérification et enregistrement des informations saisies
+            $leControleur = new DeplacementPharmacieController();
+            $leControleur->ajoutDeplacementPharmacieTrait();
+            break;
+        case "consultDelegueDeplacementPharmListeForm":
+            // demande du formulaire permettant d'obtenir la liste des
+            // demande de remboursement en vue d'une modification
+            $leControleur = new UtilisateurController();
+            $leControleur->consultDelegueDeplacementPharmacieListeForm();
+            break;
+        case "consultDelegueDeplacementPharm":
+            // affichage des demandes de remboursements saisies par le délegué
+            $leControleur = new DeplacementPharmacieController();
+            $leControleur->consultDelegueDeplacementPharm();
+            break;
+        case "modifDeplacementPharmListeForm":
+            // demande du formulaire permettant d'obtenir la liste des
+            // demande de remboursement en vue d'une modification
+            $leControleur = new DeplacementPharmacieController();
+            $leControleur->modifDeplacementPharmListeForm();
+            break;
+        case "modifDeplacementPharmForm":
+            // demande du formulaire de modification d'une demande de remboursement
+            $leControleur = new DeplacementPharmacieController();
+            $leControleur->modifDeplacementPharmForm();
+            break;
+        case "modifDeplacementPharmTrait":
+            // le formulaire de modification d'une demande de remboursement a été soumis.
+            // Vérification et enregistrement des informations saisies
+            $leControleur = new DeplacementPharmacieController();
+            $leControleur->modifDeplacementPharmacieTrait();
+            break;  
             require(ROOT . "/controller/Controller.php");
             require(ROOT . "/controller/VisiteController.php");
             $leControleur = new VisiteController();
             $leControleur->ajoutVisiteTrait();
             break;
-
-            
         case "modifDemRembListeForm":
             // demande du formulaire permettant d'obtenir la liste des
             // demande de remboursement en vue d'une modification
-            require(ROOT . "/controller/Controller.php");
-            require(ROOT . "/controller/DemandeRemboursementController.php");
             $leControleur = new DemandeRemboursementController();
             $leControleur->modifDemandeRemboursementListeForm();
             break;
         case "modifDemRembForm":
             // demande du formulaire de modification d'une demande de remboursement
-            require(ROOT . "/controller/Controller.php");
-            require(ROOT . "/controller/DemandeRemboursementController.php");
             $leControleur = new DemandeRemboursementController();
             $leControleur->modifDemandeRemboursementForm();
             break;
         case "modifDemRembTrait":
             // le formulaire de modification d'une demande de remboursement a été soumis.
             // Vérification et enregistrement des informations saisies
-            require(ROOT . "/controller/Controller.php");
-            require(ROOT . "/controller/demandeRemboursementController.php");
             $leControleur = new DemandeRemboursementController();
             $leControleur->modifDemandeRemboursementTrait();
             break;
@@ -90,8 +127,6 @@ if (isset($_GET['action'])) {
 
         case "consultMesDemRemb":
             // affichage des demandes de remboursements saisies par le délegué
-            require(ROOT . "/controller/Controller.php");
-            require(ROOT . "/controller/DemandeRemboursementController.php");
             $leControleur = new DemandeRemboursementController();
             $leControleur->consultMesDemandeRemboursement();
             break;
@@ -112,8 +147,6 @@ if (isset($_GET['action'])) {
         case "connexionTrait":
             // le formulaire de connexion a été soumis. 
             // Vérification des informations saisies
-            require(ROOT . "/controller/Controller.php");
-            require(ROOT . "/controller/UtilisateurController.php");
             $leControleur = new UtilisateurController();
             $leControleur->connexionTrait($_POST);
             break;
@@ -188,8 +221,6 @@ if (isset($_GET['action'])) {
 }
 function afficheFormConnexion()
 {
-    require(ROOT . "/controller/Controller.php");
-    require(ROOT . "/controller/UtilisateurController.php");
     $leControleur = new UtilisateurController();
     $leControleur->connexionForm();
 }

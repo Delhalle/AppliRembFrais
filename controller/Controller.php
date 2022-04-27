@@ -1,4 +1,10 @@
 <?php
+
+namespace App\controller;
+
+use App\model\entity\{Utilisateur, Action, Table, LogEvenement};
+use App\model\repository\{ActionRepository, TableRepository, LogEvenementRepository};
+
 abstract class Controller
 {
 	protected function __construct()
@@ -16,5 +22,26 @@ abstract class Controller
 			http_response_code(404);
 			echo ("<h2> Vue $nomVue indisponible</h2>");
 		}
+	}
+	public function insertInLogs($informations)
+	{
+		$unActionRepository = new ActionRepository();
+		$leIdAction = $unActionRepository->getIdByLibelle(new Action(null, $informations[0]));
+
+		$unTableRepository = new TableRepository();
+		$leIdTable = $unTableRepository->getIdByNom(new Table(null, $informations[1]));
+
+		$leLogEvenement = new LogEvenement(
+			null,
+			$_SERVER['REMOTE_ADDR'],
+			date('Y-m-d H:i:s'),
+			$informations[2],
+			new Utilisateur($informations[3]),
+			new Action($leIdAction, null),
+			new Table($leIdTable, null)
+		);
+
+		$unLogEvenementRepository = new logEvenementRepository();
+		$leResult = $unLogEvenementRepository->insertLog($leLogEvenement);
 	}
 }

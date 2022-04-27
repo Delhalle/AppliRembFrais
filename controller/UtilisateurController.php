@@ -1,12 +1,14 @@
 <?php
+namespace App\Controller;
+
+use App\Model\Entity\{Utilisateur,Profil};
+use App\Model\Repository\{UtilisateurRepository};
 
 class UtilisateurController extends Controller
 {
     public function __construct()
     {
         parent::__construct();
-        require_once(ROOT . '/model/repository/UtilisateurRepository.php');
-        require_once(ROOT . '/model/entity/Utilisateur.php');
     }
     public function connexionTrait()
     {
@@ -98,6 +100,12 @@ class UtilisateurController extends Controller
         }
         $this->render("utilisateur/ajoutUtilisateur", array("title" => "Ajout d'un utilisateur", "msg" => $msg));
     }
+
+    public function consultDelegueDeplacementPharmacieListeForm()
+    {
+        $unUtilisateurDelegueRepository = new UtilisateurRepository();
+        $lesDelegues = $unUtilisateurDelegueRepository->consultUtilisateurDelegue();
+        $this->render("deplacementPharmacie/deplacementDelegueListe", array("title" => "Liste des délégués qui vont chez des pharmacies", "lesDelegues" => $lesDelegues));
     public function consultLesDeleguesListe()
     {
         //
@@ -115,7 +123,6 @@ class UtilisateurController extends Controller
         $idDelegue = $_SESSION['id'];
         $UtilisateurRepository = new UtilisateurRepository();
         $lesDelegues = $UtilisateurRepository->getLesDelegues($idDelegue);
-
         $this->render("formationSuivi/consultFormationSuiviList", array("title" => "Liste des delegues", "lesDelegues" => $lesDelegues));
     }
 }

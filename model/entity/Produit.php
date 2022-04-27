@@ -1,12 +1,12 @@
 <?php
 namespace App\Model\Entity;
 
-class Profil
+class Produit
 {
-	private int $id;
+	private ?int $id;
 	private ?string $libelle;
 
-	public function __construct($id, $libelle = null)
+    public function __construct($id, $libelle)
 	{
 		$this->id = $id;
 		$this->libelle = $libelle;
@@ -19,7 +19,7 @@ class Profil
 	{
 		$this->id = $id;
 	}
-	public function getLibelle()
+    public function getLibelle()
 	{
 		return $this->libelle;
 	}

@@ -1,7 +1,7 @@
 <?php
-//class dont on a besoin (classe Repository.php obligatoire)
-require_once(ROOT . "/model/repository/Repository.php");
-require_once(ROOT . "/model/entity/TypeFrais.php");
+namespace App\Model\Repository;
+
+use App\Model\Entity\TypeFrais;
 
 class TypeFraisRepository extends Repository
 {

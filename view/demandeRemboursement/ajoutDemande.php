@@ -3,8 +3,8 @@
     <div class="row mb-3">
         <label for="montant" class="col-lg-4 col-form-label">Montant du remboursement</label>
         <div class="col-sm-12">
-            <input type="text" class="form-control" name="montant" value="<?php if (isset($_POST['montant']) == true) echo $_POST['montant']; ?>" id="montant">
-        </div>
+            <input type="text" class="form-control" name="montant" id="montant" value="<?php if (isset($laDemande)) echo $laDemande->getMontant()?>">
+        </div>                    
     </div>
     <div class="row mb-3">
         <label for="comment" class="col-lg-4 col-form-label">Commentaire</label>
@@ -20,7 +20,7 @@
                 <?php foreach ($lesTypesFrais as $unType) {
                     $id = $unType->getId();
                     $lib = $unType->getLibelle();
-                    if (isset($_POST['typeFrais']) == true && $_POST['typeFrais'] == $unType->getId())
+                    if (isset($laDemande) == true && $laDemande->getTypeFrais()->getId() == $unType->getId())
                         echo ("<option selected value=$id>$lib</option>");
                     else
                         echo ("<option value=$id>$lib</option>");
@@ -28,7 +28,6 @@
             </select>
         </div>
     </div>
-
 
     <div class="p-3 mb-4">
         <div class="text-center">

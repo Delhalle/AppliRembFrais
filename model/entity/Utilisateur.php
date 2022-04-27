@@ -1,4 +1,6 @@
-﻿<?php
+<?php
+namespace App\Model\Entity;
+
 class Utilisateur
 {
 	private ?int $id;
