@@ -105,7 +105,24 @@ class UtilisateurController extends Controller
     {
         $unUtilisateurDelegueRepository = new UtilisateurRepository();
         $lesDelegues = $unUtilisateurDelegueRepository->consultUtilisateurDelegue();
-
         $this->render("deplacementPharmacie/deplacementDelegueListe", array("title" => "Liste des délégués qui vont chez des pharmacies", "lesDelegues" => $lesDelegues));
+    public function consultLesDeleguesListe()
+    {
+        //
+        session_start();
+        $idDelegue = $_SESSION['id'];
+        $UtilisateurRepository = new UtilisateurRepository();
+        $lesDelegues = $UtilisateurRepository->getLesDelegues($idDelegue);
+
+        $this->render("visite/consultDelegueListe", array("title" => "Liste des delegues", "lesDelegues" => $lesDelegues));
+    }
+    public function consultLesDeleguesFormListe()
+    {
+        //
+        session_start();
+        $idDelegue = $_SESSION['id'];
+        $UtilisateurRepository = new UtilisateurRepository();
+        $lesDelegues = $UtilisateurRepository->getLesDelegues($idDelegue);
+        $this->render("formationSuivi/consultFormationSuiviList", array("title" => "Liste des delegues", "lesDelegues" => $lesDelegues));
     }
 }

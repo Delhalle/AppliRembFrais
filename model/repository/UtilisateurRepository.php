@@ -132,5 +132,47 @@ class UtilisateurRepository extends Repository
                             <br>Erreur :" . $e->getMessage());
         }
         return $lesDelegues;
+    public function getLesUtilisateurs($idDem = null)
+    {
+        $lesUtilisateurs = array();
+        $db = $this->dbConnect();
+        $req = $db->prepare("select utilisateur.id, utilisateur.nom, utilisateur.prenom from utilisateur");
+        // on affecte une valeur au paramètre déclaré dans la requête 
+        $req->bindValue(':par_id', $idDem, PDO::PARAM_INT);
+        // on demande l'exécution de la requête 
+        $req->execute();
+        $enreg = $req->fetch();
+        $unUtilisateur = new Utilisateur(
+            $enreg->id,
+            $enreg->nom,
+            $enreg->prenom,
+        );
+
+        array_push($lesUtilisateurs, $unUtilisateur);
+        return $lesUtilisateurs;
+    }
+
+    public function getLesDelegues()
+    {
+        
+        $lesDelegues = array();
+        $db = $this->dbConnect();
+        $req = $db->prepare("select id, utilisateur.nom, utilisateur.prenom 
+                        from utilisateur
+                        where id_profil = 1");
+        // on demande l'exécution de la requête 
+        $req->execute();
+        $lesEnregs = $req->fetchAll();
+        foreach ($lesEnregs  as $enreg) {
+            $unDelegue = new Utilisateur(
+                $enreg->id,
+                $enreg->nom,
+                $enreg->prenom,
+                null
+            );
+
+            array_push($lesDelegues, $unDelegue);
+        }
+        return $lesDelegues;
     }
 }
