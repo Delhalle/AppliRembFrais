@@ -1,4 +1,8 @@
 <?php
+namespace App\Model\Entity;
+
+use DateTime;
+
 class DeplacementPharmacie
 {
 	private ?int $id;

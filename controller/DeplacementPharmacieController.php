@@ -1,17 +1,15 @@
 <?php
+namespace App\Controller;
+
+use DateTime;
+use App\Model\Entity\{Action,LogEvenement,Table,Pharmacie,Utilisateur,DeplacementPharmacie,Produit};
+use App\Model\Repository\{PharmacieRepository,DeplacementPharmacieRepository,ProduitRepository,TableRepository,ActionRepository,LogEvenementRepository};
 
 class DeplacementPharmacieController extends Controller
 {
     public function __construct()
     {
         parent::__construct();
-        require_once(ROOT . '/model/repository/DeplacementPharmacieRepository.php');
-        require_once(ROOT . '/model/repository/PharmacieRepository.php');
-        require_once(ROOT . '/model/repository/ProduitRepository.php');
-        require_once(ROOT . '/model/entity/DeplacementPharmacie.php');
-        require_once(ROOT . '/model/entity/Pharmacie.php');
-        require_once(ROOT . '/model/entity/Produit.php');
-        require_once(ROOT . '/model/entity/Utilisateur.php');
     }
     public function ajoutDeplacementPharmacieForm()
     {
@@ -43,6 +41,7 @@ class DeplacementPharmacieController extends Controller
         } else {
             $_POST = array();
             $msg = "<p class='text-success'>Votre demande a été enregistrée</p>";
+            $this->insertInLogs(["insert", "deplacement_pharmacie", $ret[1], $idUtilConnecte]);
         }
         //
         $PharmacieRepository = new PharmacieRepository();
@@ -112,6 +111,7 @@ class DeplacementPharmacieController extends Controller
             $this->render("deplacementPharmacie/modifDeplacement", array("title" => "Modification d'un déplacement chez un pharmacien", "lesPharmacies" => $lesPharmacies, "lesProduits" => "lesProduits", "leDeplacement" => $leDeplacement, "msg" => $msg));
         } else {
             $msg = "modification effectuée";
+            $this->insertInLogs(["update", "deplacement_pharmacie", $_POST['idDeplacement'], $idUtilConnecte]);
             $unDeplacementPharmRepository = new DeplacementPharmacieRepository();
             $lesDeplacements = $unDeplacementPharmRepository->getLesDeplacementsDeleguePharm($idUtilConnecte);
             $this->render("deplacementPharmacie/modifDeplacementListe", array("title" => "Modification d'un deplacement chez un pharmacien", "lesDeplacements" => $lesDeplacements, "msg" => $msg));

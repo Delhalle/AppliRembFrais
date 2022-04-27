@@ -1,7 +1,12 @@
 <?php
+namespace App\Model\Repository;
+
+use PDO;
+use PDOException;
+use DateTime;
+use App\Model\Entity\{DeplacementPharmacie,Pharmacie,Produit,Ville};
+
 date_default_timezone_set('Europe/Paris');
-//class dont on a besoin (classe Repository.php obligatoire)
-require_once("Repository.php");
 
 class DeplacementPharmacieRepository extends Repository
 {
@@ -25,7 +30,11 @@ class DeplacementPharmacieRepository extends Repository
         } catch (PDOException $e) {
             $ret = false;
         }
-        return $ret;
+        if ($ret != False){
+            $insertedId = $db->lastInsertId();
+            return [$ret, $insertedId];
+        }
+        return [$ret];
     }
 
     public function getLesDeplacementsDeleguePharm($idDelegue = null)
@@ -109,7 +118,6 @@ class DeplacementPharmacieRepository extends Repository
         } catch (PDOException $e) {
             $ret = false;
         }
-
         return $ret;
     }
 }

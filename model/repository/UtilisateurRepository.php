@@ -1,9 +1,10 @@
 <?php
-//class dont on a besoin (classe Repository.php obligatoire)
-require_once(ROOT . "/model/repository/Repository.php");
-require_once(ROOT . "/model/entity/Utilisateur.php");
-require_once(ROOT . "/model/entity/Profil.php");
-require_once(ROOT . "/model/entity/Fonctionnalite.php");
+namespace App\Model\Repository;
+
+use PDO;
+use PDOException;
+use App\Model\Entity\{Profil,Fonctionnalite,Utilisateur};
+
 class UtilisateurRepository extends Repository
 {
     // fonction de connexion

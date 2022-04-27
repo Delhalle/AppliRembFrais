@@ -11,6 +11,7 @@
             <div class="col-sm-12">
                 <!-- liste déroulante -->
                 <select class="form-select form-select-md" onChange="submit();" name="listDemRemb">
+                <option value="" ></option>
                     <?php foreach ($lesDemandes as $uneDemande) {
                         $id = $uneDemande->getId();
                         $libelle = $uneDemande->getTypeFrais()->getLibelle() . ' , montant : ' . $uneDemande->getMontant();

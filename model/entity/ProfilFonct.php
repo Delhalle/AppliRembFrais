@@ -1,7 +1,8 @@
 <?php
+namespace App\Model\Entity;
+
 class ProfilFonct
 {
-
 	private Profil $leProfil;
 	private Fonctionnalite $laFonct;
 
