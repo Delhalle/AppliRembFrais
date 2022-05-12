@@ -148,7 +148,7 @@ if (isset($_GET['action'])) {
             break;
 
 
-        case "modifFormSuiviListeForm":
+        case "modifFormationSuiviList":
             // demande du formulaire permettant d'obtenir la liste des
             // demande de remboursement en vue d'une modification
             require(ROOT . "/controller/Controller.php");
