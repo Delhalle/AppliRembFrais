@@ -1,7 +1,7 @@
 <?php
-//class dont on a besoin (classe Repository.php obligatoire)
-require_once(ROOT . "/model/repository/Repository.php");
-require_once(ROOT . "/model/entity/Formation.php");
+namespace App\Model\Repository;
+
+USE App\Model\Entity\{Formation};
 
 class FormationRepository extends Repository
 {

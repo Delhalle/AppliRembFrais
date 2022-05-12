@@ -1,16 +1,15 @@
 <?php
+namespace App\Controller;
+
+use App\Model\Entity\{FormationSuivi, Utilisateur, Formation };
+use App\Model\Repository\{FormationSuiviRepository, FormationRepository };
+
 
 class FormationSuiviController extends Controller
 {
     public function __construct()
     {
         parent::__construct();
-        require_once(ROOT . '/model/repository/FormationSuiviRepository.php');
-        require_once(ROOT . '/model/repository/UtilisateurRepository.php');
-        require_once(ROOT . '/model/repository/FormationRepository.php');
-        require_once(ROOT . '/model/entity/FormationSuivi.php');
-        require_once(ROOT . '/model/entity/Utilisateur.php');
-        require_once(ROOT . '/model/entity/Formation.php');
     }
     public function ajoutFormationSuiviForm()
     {
@@ -105,9 +104,60 @@ class FormationSuiviController extends Controller
         }
     }
 
+    public function suppFormationSuiviListeForm()
+    {
+        //
+        session_start();
+        $idUtilConnecte = $_SESSION['id'];
+        $uneFormSuiviRepository = new formationSuiviRepository();
+        $lesFormationsSuivi = $uneFormSuiviRepository->getMesFormationsSuivi($idUtilConnecte);
 
+        $this->render("formationSuivi/suppFormationSuiviList", array("title" => "Liste des formations suivi", "lesFormationsSuivi" => $lesFormationsSuivi));
+    }
 
+    public function suppFormationSuiviForm()
+    {
+        //
+        $formationRepository = new FormationRepository();
+        $lesFormations = $formationRepository->getLesFormations();
 
+        //
+        $idFormSuivi =  $_POST["listFormSuivi"];
+
+        //
+        $uneFormSuiviRepository = new FormationSuiviRepository();
+        $laFormSuiviASupprimer = $uneFormSuiviRepository->getUneFormationSuivi($idFormSuivi);
+        //
+        $this->render("formationSuivi/suppFormationSuivi", array("title" => "Suppression d'une formation suivi", "lesFormations" => $lesFormations, "laFormSuivi" => $laFormSuiviASupprimer));
+    }
+
+    public function suppFormationSuiviTrait()
+    {
+        //
+        $uneFormationSuiviRepository = new FormationSuiviRepository();
+        session_start();
+        $idUtilConnecte = $_SESSION['id'];
+        $laFormSuiviASupprimer = new FormationSuivi(
+            $_POST['idFormSuivi'],
+            date('Y-m-d H:i:s'),
+            $_POST['commentaire'],
+            new Formation($_POST['formation'], null),
+            new Utilisateur($idUtilConnecte)
+        );
+        $uneFormationSuiviRepository = new FormationSuiviRepository();
+        $ret = $uneFormationSuiviRepository->suppFormationSuivi($laFormSuiviASupprimer);
+        if ($ret == false) {
+            $msg = "suppication impossible";
+            $formationRepository = new formationRepository();
+            $lesFormations = $formationRepository->getlesFormations();
+            $this->render("formationSuivi/suppFormationSuivi", array("title" => "Suppression d'une formation suivi", "lesFormations" => $lesFormations, "laFormSuivi" => $laFormSuiviASupprimer, "msg" => $msg));
+        } else {
+            $msg = "suppression effectuée";
+            $uneFormationSuiviRepository = new FormationSuiviRepository();
+            $lesFormationsSuivi = $uneFormationSuiviRepository->getMesFormationsSuivi($idUtilConnecte);
+            $this->render("formationSuivi/suppFormationSuiviList", array("title" => "Liste des formations suivi", "lesFormationsSuivi" => $lesFormationsSuivi, "msg" => $msg));
+        }
+    }
 
 
 

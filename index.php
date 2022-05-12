@@ -1,6 +1,6 @@
 <?php
 use App\Autoloader;
-use App\Controller\{UtilisateurController,DemandeRemboursementController,DeplacementPharmacieController};
+use App\Controller\{UtilisateurController,DemandeRemboursementController,DeplacementPharmacieController, FormationSuiviController};
 
 require_once "./autoloader.php";
 Autoloader::register();
@@ -203,6 +203,30 @@ if (isset($_GET['action'])) {
             require(ROOT . "/controller/formationSuiviController.php");
             $leControleur = new formationSuiviController();
             $leControleur->modifFormationSuiviTrait();
+            break;
+
+            case "suppFormSuiviListForm":
+                // demande du formulaire permettant d'obtenir la liste des
+                // demande de remboursement en vue d'une suppression
+                require(ROOT . "/controller/Controller.php");
+                require(ROOT . "/controller/formationSuiviController.php");
+                $leControleur = new formationSuiviController();
+                $leControleur->suppFormationSuiviListeForm();
+                break;
+        case "suppFormSuiviForm":
+            // demande du formulaire de suppication d'une demande de remboursement
+            require(ROOT . "/controller/Controller.php");
+            require(ROOT . "/controller/formationSuiviController.php");
+            $leControleur = new formationSuiviController();
+            $leControleur->suppFormationSuiviForm();
+            break;
+        case "suppFormSuiviTrait":
+            // le formulaire de suppication d'une demande de remboursement a été soumis.
+            // Vérification et enregistrement des informations saisies
+            require(ROOT . "/controller/Controller.php");
+            require(ROOT . "/controller/formationSuiviController.php");
+            $leControleur = new formationSuiviController();
+            $leControleur->suppFormationSuiviTrait();
             break;
 
 

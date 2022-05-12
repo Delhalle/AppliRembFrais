@@ -132,6 +132,7 @@ class UtilisateurRepository extends Repository
                             <br>Erreur :" . $e->getMessage());
         }
         return $lesDelegues;
+    }
     public function getLesUtilisateurs($idDem = null)
     {
         $lesUtilisateurs = array();

@@ -1,7 +1,11 @@
 <?php
+namespace App\Model\Repository;
+
+USE PDO;
+USE PDOException;
+USE App\Model\Entity\{Formation, FormationSuivi};
+
 date_default_timezone_set('Europe/Paris');
-//class dont on a besoin (classe Repository.php obligatoire)
-require_once("Repository.php");
 
 class FormationSuiviRepository extends Repository
 {
@@ -55,25 +59,26 @@ class FormationSuiviRepository extends Repository
         return $ret;
     }
 
+    public function suppFormationSuivi(FormationSuivi $formSuiviASupp)
+    {
+        $db = $this->dbConnect();
+        try {
+            // on prépare la requête select
+            $req = $db->prepare("DELETE FROM formation_suivi
+                                WHERE formation_suivi.id = :par_id_formSuivi");
+            // on affecte une valeur au paramètre déclaré dans la requête 
+            // récupération de la date du jour 
+            $req->bindValue(':par_id_formSuivi', $formSuiviASupp->getId(), PDO::PARAM_INT);
+            // on demande l'exécution de la requête 
+            $ret = $req->execute();
 
+            $ret = true;
+        } catch (PDOException $e) {
+            $ret = false;
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return $ret;
+    }
 
     public function getMesFormationsSuivi($idDelegue)
     {
