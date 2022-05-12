@@ -148,7 +148,7 @@ if (isset($_GET['action'])) {
             break;
 
 
-        case "modifFormationSuiviList":
+        case "modifFormSuiviList":
             // demande du formulaire permettant d'obtenir la liste des
             // demande de remboursement en vue d'une modification
             require(ROOT . "/controller/Controller.php");
@@ -171,6 +171,31 @@ if (isset($_GET['action'])) {
             $leControleur = new formationSuiviController();
             $leControleur->modifFormationSuiviTrait();
             break;
+
+
+            case "suppFormSuiviList":
+                // demande du formulaire permettant d'obtenir la liste des
+                // demande de remboursement en vue d'une suppression
+                require(ROOT . "/controller/Controller.php");
+                require(ROOT . "/controller/formationSuiviController.php");
+                $leControleur = new formationSuiviController();
+                $leControleur->suppFormationSuiviListeForm();
+                break;
+            case "suppFormSuiviForm":
+                // demande du formulaire de suppression d'une demande de remboursement
+                require(ROOT . "/controller/Controller.php");
+                require(ROOT . "/controller/formationSuiviController.php");
+                $leControleur = new formationSuiviController();
+                $leControleur->suppFormationSuiviForm();
+                break;
+            case "suppFormSuiviTrait":
+                // le formulaire de suppression d'une demande de remboursement a été soumis.
+                // Vérification et enregistrement des informations saisies
+                require(ROOT . "/controller/Controller.php");
+                require(ROOT . "/controller/formationSuiviController.php");
+                $leControleur = new formationSuiviController();
+                $leControleur->suppFormationSuiviTrait();
+                break;
 
 
         case "accueil":

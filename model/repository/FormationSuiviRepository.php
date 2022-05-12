@@ -33,7 +33,7 @@ class FormationSuiviRepository extends Repository
     {
         $db = $this->dbConnect();
         try {
-            // on prépare la requête select
+            // on prépare la requête update
             $req = $db->prepare("update formation_suivi 
             set  commentaire = :par_commentaire,
             id_formation=:par_id_formation, id_delegue=:par_id_delegue
@@ -55,23 +55,24 @@ class FormationSuiviRepository extends Repository
         return $ret;
     }
 
+    public function suppFormationSuivi(FormationSuivi $formSuiviASupp)
+    {
+        $db = $this->dbConnect();
+        try {
+            // on prépare la requête delete
+            $req = $db->prepare("DELETE formation_suivi WHERE id = par_id_formSuivi");
+            // on affecte une valeur au paramètre déclaré dans la requête 
+            $req->bindValue(':par_id_formSuivi', $formSuiviASupp->getId(), PDO::PARAM_INT);
+            // on demande l'exécution de la requête 
+            $ret = $req->execute();
 
+            $ret = true;
+        } catch (PDOException $e) {
+            $ret = false;
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return $ret;
+    }
 
 
 
