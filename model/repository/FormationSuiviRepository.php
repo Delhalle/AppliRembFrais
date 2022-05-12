@@ -60,7 +60,7 @@ class FormationSuiviRepository extends Repository
         $db = $this->dbConnect();
         try {
             // on prépare la requête delete
-            $req = $db->prepare("DELETE formation_suivi WHERE id = par_id_formSuivi");
+            $req = $db->prepare("DELETE FROM formation_suivi WHERE id = par_id_formSuivi");
             // on affecte une valeur au paramètre déclaré dans la requête 
             $req->bindValue(':par_id_formSuivi', $formSuiviASupp->getId(), PDO::PARAM_INT);
             // on demande l'exécution de la requête 
