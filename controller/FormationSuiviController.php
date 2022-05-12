@@ -113,7 +113,7 @@ class FormationSuiviController extends Controller
         $uneFormSuiviRepository = new formationSuiviRepository();
         $lesFormationsSuivi = $uneFormSuiviRepository->getMesFormationsSuivi($idUtilConnecte);
         
-        $this->render("formationSuivi/suppFormationSuiviList", array ("title"=> "Liste des formation suivi", "lesFormationSuivi" => $lesFormationsSuivi));
+        $this->render("formationSuivi/suppFormationSuiviList", array ("title"=> "Liste des formation suivi", "lesFormationsSuivi" => $lesFormationsSuivi));
     }
 
     public function suppFormationSuiviForm()

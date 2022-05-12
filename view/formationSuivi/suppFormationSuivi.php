@@ -31,7 +31,7 @@
 
     <div class="p-3 mb-4">
         <div class="text-center">
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
+            <button type="submit" class="btn btn-primary">Supprimer</button>
         </div>
     </div>
 </form>
