@@ -112,7 +112,7 @@ class FormationSuiviRepository extends Repository
     public function getUneFormationSuivi($idFormSuivi)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare("select formation_suivi.id,id_formation,commentaire from formation_suivi 
+        $req = $db->prepare("select formation_suivi.id,DATE_FORMAT(date_saisie, '%d/%m/%Y') as date_saisie, id_formation,formation.formation,commentaire from formation_suivi 
         join formation on formation.id = id_formation where formation_suivi.id = :par_id");
         // on affecte une valeur au paramètre déclaré dans la requête 
         $req->bindValue(':par_id', $idFormSuivi, PDO::PARAM_INT);
@@ -121,9 +121,9 @@ class FormationSuiviRepository extends Repository
         $enreg = $req->fetch();
         $uneFormSuivi = new FormationSuivi(
             $enreg->id,
-            null,
+            $enreg->date_saisie,
             $enreg->commentaire,
-            new Formation($enreg->id_formation, null),
+            new Formation($enreg->id_formation, $enreg->formation),
             null
         );
         return $uneFormSuivi;

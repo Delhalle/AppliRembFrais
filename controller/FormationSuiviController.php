@@ -147,7 +147,7 @@ class FormationSuiviController extends Controller
         $uneFormationSuiviRepository = new FormationSuiviRepository();
         $ret = $uneFormationSuiviRepository->suppFormationSuivi($laFormSuiviASupprimer);
         if ($ret == false) {
-            $msg = "suppication impossible";
+            $msg = "suppression impossible";
             $formationRepository = new formationRepository();
             $lesFormations = $formationRepository->getlesFormations();
             $this->render("formationSuivi/suppFormationSuivi", array("title" => "Suppression d'une formation suivi", "lesFormations" => $lesFormations, "laFormSuivi" => $laFormSuiviASupprimer, "msg" => $msg));

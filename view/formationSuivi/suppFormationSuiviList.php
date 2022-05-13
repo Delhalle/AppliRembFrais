@@ -15,10 +15,11 @@
                     <?php foreach ($lesFormationsSuivi as $uneFormationSuivi) {
                         $id = $uneFormationSuivi->getId();
                         $libelle = $uneFormationSuivi->getFormation()->getFormation();
+                        $commentaire = $uneFormationSuivi->getCommentaire();
                         if (isset($_POST['listFormSuivi']) == true && $_POST['listFormSuivi'] == $id)
-                            echo ("<option selected value=$id>$libelle</option>");
+                            echo ("<option selected value=$id>$libelle Commentaire : $commentaire</option>");
                         else
-                            echo ("<option value=$id>$libelle</option>");
+                            echo ("<option value=$id>$libelle Commentaire : $commentaire</option>");
                     } ?>
                 </select>
 
